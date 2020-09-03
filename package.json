@@ -1,0 +1,54 @@
+{
+	"name": "@liquicode/lib-datatable",
+	"version": "0.1.1",
+	"description": "A NodeJS library to manipulate an in memory table (array of arrays).",
+	"homepage": "http://lib-datatable.liquicode.com",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/liquicode/lib-datatable.git"
+	},
+	"authors": [
+		{
+			"name": "Andre' G. Bowlin",
+			"email": "agbowlin@gmail.com",
+			"homepage": "http://liquicode.com"
+		}
+	],
+	"main": "lib/lib-datatable.js",
+	"files": [
+		"README.md",
+		"LICENSE",
+		"lib/*",
+		"docs/*",
+		"tests/*"
+	],
+	"ignore": [
+		".*",
+		"node_modules",
+		"build",
+		"~scratch"
+	],
+	"keywords": [
+		"javascript",
+		"js",
+		"nodejs",
+		"node",
+		"token",
+		"tokenize",
+		"tokenizer"
+	],
+	"dependencies": {},
+	"devDependencies": {
+		"mocha": "^7.1.2",
+		"webpack": "^4.43.0",
+		"webpack-cli": "^3.3.11",
+		"webpack-node-externals": "^1.7.2"
+	},
+	"scripts": {
+		"run-tests": "mocha -u bdd tests --timeout 60000",
+		"010-webpack": "bash build/webpack/010-webpack.sh",
+		"810-s3-sync-docs": "bash build/s3/810-s3-sync-docs.sh",
+		"900-npm-publish-public": "bash build/npm/900-npm-publish-public.sh"
+	}
+}
