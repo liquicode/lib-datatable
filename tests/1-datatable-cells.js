@@ -13,6 +13,78 @@ describe( `Datatable Cells Tests`,
 
 
 		//---------------------------------------------------------------------
+		it( `GetValue()					- Gets the value at the first row and column.`,
+			async function ()
+			{
+				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.ProductMatrix );
+				LIB_ASSERT.notEqual( datatable, null );
+				let value = datatable.GetValue();
+				LIB_ASSERT.equal( value, 0, 'mismatched value' );
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
+		it( `GetValue( 0 )				- Gets the value at the first row and column.`,
+			async function ()
+			{
+				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.ProductMatrix );
+				LIB_ASSERT.notEqual( datatable, null );
+				let value = datatable.GetValue( 0 );
+				LIB_ASSERT.equal( value, 0, 'mismatched value' );
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
+		it( `GetValue( 0, 0 )			- Gets the value at the first row and column.`,
+			async function ()
+			{
+				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.ProductMatrix );
+				LIB_ASSERT.notEqual( datatable, null );
+				let value = datatable.GetValue( 0, 0 );
+				LIB_ASSERT.equal( value, 0, 'mismatched value' );
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
+		it( `GetValue( 1, 1 )			- Gets the value at the second row and column.`,
+			async function ()
+			{
+				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.ProductMatrix );
+				LIB_ASSERT.notEqual( datatable, null );
+				let value = datatable.GetValue( 1, 1 );
+				LIB_ASSERT.equal( value, 1, 'mismatched value' );
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
+		it( `GetValue( -1, -1 )			- Gets the value at the last row and column.`,
+			async function ()
+			{
+				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.ProductMatrix );
+				LIB_ASSERT.notEqual( datatable, null );
+				let value = datatable.GetValue( -1, -1 );
+				LIB_ASSERT.equal( value, ( ( LIB_TEST.TestMatrixSize - 1 ) * ( LIB_TEST.TestMatrixSize - 1 ) ), 'mismatched value' );
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
+		it( `GetValue( -2, -2 )			- Gets the value at the second to last row and column.`,
+			async function ()
+			{
+				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.ProductMatrix );
+				LIB_ASSERT.notEqual( datatable, null );
+				let value = datatable.GetValue( -2, -2 );
+				LIB_ASSERT.equal( value, ( ( LIB_TEST.TestMatrixSize - 2 ) * ( LIB_TEST.TestMatrixSize - 2 ) ), 'mismatched value' );
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
 		it( `should get a nonexistent cell`,
 			async function ()
 			{
