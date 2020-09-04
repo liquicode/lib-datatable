@@ -13,69 +13,6 @@ describe( `Datatable Columns Tests`,
 
 
 		//---------------------------------------------------------------------
-		it( `InsertBlankColumns()			- Insert a single blank column to the beginning.`,
-			async function ()
-			{
-				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.CountMatrix );
-				LIB_ASSERT.notEqual( datatable, null );
-				datatable.InsertBlankColumns();
-				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.TestMatrixSize, 'mismatched row count' );
-				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.TestMatrixSize + 1, 'mismatched column count' );
-				LIB_ASSERT.equal( datatable.GetValue( 0, 0 ), datatable.options.blank_value, 'mismatched value at (0, 0)' );
-				LIB_ASSERT.equal( datatable.GetValue( 0, LIB_TEST.TestMatrixSize ), LIB_TEST.TestMatrixSize - 1, 'mismatched value at (0, -1)' );
-				return;
-			} );
-
-
-		//---------------------------------------------------------------------
-		it( `InsertBlankColumns( 3 )		- Insert three blank columns to the beginning.`,
-			async function ()
-			{
-				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.CountMatrix );
-				LIB_ASSERT.notEqual( datatable, null );
-				datatable.InsertBlankColumns( 3 );
-				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.TestMatrixSize, 'mismatched row count' );
-				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.TestMatrixSize + 3, 'mismatched column count' );
-				LIB_ASSERT.equal( datatable.GetValue( 0, 0 ), datatable.options.blank_value, 'mismatched value at (0, 0)' );
-				LIB_ASSERT.equal( datatable.GetValue( 0, 2 ), datatable.options.blank_value, 'mismatched value at (0, 2)' );
-				LIB_ASSERT.equal( datatable.GetValue( 0, LIB_TEST.TestMatrixSize + 2 ), LIB_TEST.TestMatrixSize - 1, 'mismatched value at (0, -1)' );
-				return;
-			} );
-
-
-		//---------------------------------------------------------------------
-		it( `InsertBlankColumns( 3, 0 )		- Insert three blank columns to the beginning.`,
-			async function ()
-			{
-				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.CountMatrix );
-				LIB_ASSERT.notEqual( datatable, null );
-				datatable.InsertBlankColumns( 3, 0 );
-				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.TestMatrixSize, 'mismatched row count' );
-				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.TestMatrixSize + 3, 'mismatched column count' );
-				LIB_ASSERT.equal( datatable.GetValue( 0, 0 ), datatable.options.blank_value, 'mismatched value at (0, 0)' );
-				LIB_ASSERT.equal( datatable.GetValue( 0, 2 ), datatable.options.blank_value, 'mismatched value at (0, 2)' );
-				LIB_ASSERT.equal( datatable.GetValue( 0, LIB_TEST.TestMatrixSize + 2 ), LIB_TEST.TestMatrixSize - 1, 'mismatched value at (0, -1)' );
-				return;
-			} );
-
-
-		//---------------------------------------------------------------------
-		it( `InsertBlankColumns( 3, 5 )		- Insert three blank columns at column index 5.`,
-			async function ()
-			{
-				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.CountMatrix );
-				LIB_ASSERT.notEqual( datatable, null );
-				datatable.InsertBlankColumns( 3, 5 );
-				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.TestMatrixSize, 'mismatched row count' );
-				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.TestMatrixSize + 3, 'mismatched column count' );
-				LIB_ASSERT.equal( datatable.GetValue( 0, 5 ), datatable.options.blank_value, 'mismatched value at (0, 5)' );
-				LIB_ASSERT.equal( datatable.GetValue( 0, 7 ), datatable.options.blank_value, 'mismatched value at (0, 7)' );
-				LIB_ASSERT.equal( datatable.GetValue( 0, LIB_TEST.TestMatrixSize + 2 ), LIB_TEST.TestMatrixSize - 1, 'mismatched value at (0, -1)' );
-				return;
-			} );
-
-
-		//---------------------------------------------------------------------
 		it( `DeleteColumns()				- Delete all columns.`,
 			async function ()
 			{
@@ -227,6 +164,69 @@ describe( `Datatable Columns Tests`,
 				LIB_ASSERT.equal( datatable.GetValue( 0, LIB_TEST.TestMatrixSize - 1 ), datatable.options.blank_value, 'mismatched value at (0, -1)' );
 				LIB_ASSERT.equal( datatable.GetValue( 0, LIB_TEST.TestMatrixSize - 2 ), datatable.options.blank_value, 'mismatched value at (0, -2)' );
 				LIB_ASSERT.equal( datatable.GetValue( 0, LIB_TEST.TestMatrixSize - 3 ), datatable.options.blank_value, 'mismatched value at (0, -3)' );
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
+		it( `InsertBlankColumns()			- Insert a single blank column to the beginning.`,
+			async function ()
+			{
+				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.CountMatrix );
+				LIB_ASSERT.notEqual( datatable, null );
+				datatable.InsertBlankColumns();
+				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.TestMatrixSize, 'mismatched row count' );
+				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.TestMatrixSize + 1, 'mismatched column count' );
+				LIB_ASSERT.equal( datatable.GetValue( 0, 0 ), datatable.options.blank_value, 'mismatched value at (0, 0)' );
+				LIB_ASSERT.equal( datatable.GetValue( 0, LIB_TEST.TestMatrixSize ), LIB_TEST.TestMatrixSize - 1, 'mismatched value at (0, -1)' );
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
+		it( `InsertBlankColumns( 3 )		- Insert three blank columns to the beginning.`,
+			async function ()
+			{
+				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.CountMatrix );
+				LIB_ASSERT.notEqual( datatable, null );
+				datatable.InsertBlankColumns( 3 );
+				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.TestMatrixSize, 'mismatched row count' );
+				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.TestMatrixSize + 3, 'mismatched column count' );
+				LIB_ASSERT.equal( datatable.GetValue( 0, 0 ), datatable.options.blank_value, 'mismatched value at (0, 0)' );
+				LIB_ASSERT.equal( datatable.GetValue( 0, 2 ), datatable.options.blank_value, 'mismatched value at (0, 2)' );
+				LIB_ASSERT.equal( datatable.GetValue( 0, LIB_TEST.TestMatrixSize + 2 ), LIB_TEST.TestMatrixSize - 1, 'mismatched value at (0, -1)' );
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
+		it( `InsertBlankColumns( 3, 0 )		- Insert three blank columns to the beginning.`,
+			async function ()
+			{
+				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.CountMatrix );
+				LIB_ASSERT.notEqual( datatable, null );
+				datatable.InsertBlankColumns( 3, 0 );
+				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.TestMatrixSize, 'mismatched row count' );
+				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.TestMatrixSize + 3, 'mismatched column count' );
+				LIB_ASSERT.equal( datatable.GetValue( 0, 0 ), datatable.options.blank_value, 'mismatched value at (0, 0)' );
+				LIB_ASSERT.equal( datatable.GetValue( 0, 2 ), datatable.options.blank_value, 'mismatched value at (0, 2)' );
+				LIB_ASSERT.equal( datatable.GetValue( 0, LIB_TEST.TestMatrixSize + 2 ), LIB_TEST.TestMatrixSize - 1, 'mismatched value at (0, -1)' );
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
+		it( `InsertBlankColumns( 3, 5 )		- Insert three blank columns at column index 5.`,
+			async function ()
+			{
+				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.CountMatrix );
+				LIB_ASSERT.notEqual( datatable, null );
+				datatable.InsertBlankColumns( 3, 5 );
+				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.TestMatrixSize, 'mismatched row count' );
+				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.TestMatrixSize + 3, 'mismatched column count' );
+				LIB_ASSERT.equal( datatable.GetValue( 0, 5 ), datatable.options.blank_value, 'mismatched value at (0, 5)' );
+				LIB_ASSERT.equal( datatable.GetValue( 0, 7 ), datatable.options.blank_value, 'mismatched value at (0, 7)' );
+				LIB_ASSERT.equal( datatable.GetValue( 0, LIB_TEST.TestMatrixSize + 2 ), LIB_TEST.TestMatrixSize - 1, 'mismatched value at (0, -1)' );
 				return;
 			} );
 
