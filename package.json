@@ -1,6 +1,6 @@
 {
 	"name": "@liquicode/lib-datatable",
-	"version": "0.1.1",
+	"version": "0.0.1",
 	"description": "A NodeJS library to manipulate an in memory table (array of arrays).",
 	"homepage": "http://lib-datatable.liquicode.com",
 	"license": "MIT",
@@ -34,12 +34,13 @@
 		"js",
 		"nodejs",
 		"node",
-		"token",
-		"tokenize",
-		"tokenizer"
+		"table",
+		"datatable",
+		"spreadsheet"
 	],
 	"dependencies": {},
 	"devDependencies": {
+		"@vivaxy/here": "^3.4.0",
 		"mocha": "^7.1.2",
 		"webpack": "^4.43.0",
 		"webpack-cli": "^3.3.11",
@@ -47,7 +48,9 @@
 	},
 	"scripts": {
 		"run-tests": "mocha -u bdd tests --timeout 60000",
+		"run-web-server": "npx here --directory docs --port 4200 --watch 1 --silent",
 		"010-webpack": "bash build/webpack/010-webpack.sh",
+		"020-gen-lib-docs": "node build/docs/020-gen-lib-docs.js ./docs ./lib ./tests",
 		"810-s3-sync-docs": "bash build/s3/810-s3-sync-docs.sh",
 		"900-npm-publish-public": "bash build/npm/900-npm-publish-public.sh"
 	}

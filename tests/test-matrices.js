@@ -1,17 +1,17 @@
 "use strict";
 
 
-const TestMatrixSize = 32;
+const MatrixSize = 32;
 
 
 //---------------------------------------------------------------------
 var CountMatrix = [];
 {
 	let cell_count = 0;
-	for ( let row_index = 0; row_index < TestMatrixSize; row_index++ )
+	for ( let row_index = 0; row_index < MatrixSize; row_index++ )
 	{
 		let row = [];
-		for ( let col_index = 0; col_index < TestMatrixSize; col_index++ )
+		for ( let col_index = 0; col_index < MatrixSize; col_index++ )
 		{
 			row.push( cell_count );
 			cell_count++;
@@ -24,10 +24,10 @@ var CountMatrix = [];
 var PartialCountMatrix = [];
 {
 	let cell_count = 0;
-	for ( let row_index = 0; row_index < TestMatrixSize; row_index++ )
+	for ( let row_index = 0; row_index < MatrixSize; row_index++ )
 	{
 		let row = [];
-		for ( let col_index = 0; col_index < TestMatrixSize; col_index++ )
+		for ( let col_index = 0; col_index < MatrixSize; col_index++ )
 		{
 			if ( col_index <= row_index )
 			{
@@ -42,10 +42,10 @@ var PartialCountMatrix = [];
 //---------------------------------------------------------------------
 var SumMatrix = [];
 {
-	for ( let row_index = 0; row_index < TestMatrixSize; row_index++ )
+	for ( let row_index = 0; row_index < MatrixSize; row_index++ )
 	{
 		let row = [];
-		for ( let col_index = 0; col_index < TestMatrixSize; col_index++ )
+		for ( let col_index = 0; col_index < MatrixSize; col_index++ )
 		{
 			let value = ( row_index + col_index );
 			row.push( value );
@@ -57,10 +57,10 @@ var SumMatrix = [];
 //---------------------------------------------------------------------
 var ProductMatrix = [];
 {
-	for ( let row_index = 0; row_index < TestMatrixSize; row_index++ )
+	for ( let row_index = 0; row_index < MatrixSize; row_index++ )
 	{
 		let row = [];
-		for ( let col_index = 0; col_index < TestMatrixSize; col_index++ )
+		for ( let col_index = 0; col_index < MatrixSize; col_index++ )
 		{
 			let value = ( row_index * col_index );
 			row.push( value );
@@ -70,7 +70,7 @@ var ProductMatrix = [];
 }
 
 
-exports.TestMatrixSize = TestMatrixSize;
+exports.MatrixSize = MatrixSize;
 exports.CountMatrix = CountMatrix;
 exports.PartialCountMatrix = PartialCountMatrix;
 exports.SumMatrix = SumMatrix;

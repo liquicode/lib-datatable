@@ -67,7 +67,7 @@ describe( `Datatable Cells Tests`,
 				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.ProductMatrix );
 				LIB_ASSERT.notEqual( datatable, null );
 				let value = datatable.GetValue( -1, -1 );
-				LIB_ASSERT.equal( value, ( ( LIB_TEST.TestMatrixSize - 1 ) * ( LIB_TEST.TestMatrixSize - 1 ) ), 'mismatched value' );
+				LIB_ASSERT.equal( value, ( ( LIB_TEST.MatrixSize - 1 ) * ( LIB_TEST.MatrixSize - 1 ) ), 'mismatched value' );
 				return;
 			} );
 
@@ -79,18 +79,18 @@ describe( `Datatable Cells Tests`,
 				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.ProductMatrix );
 				LIB_ASSERT.notEqual( datatable, null );
 				let value = datatable.GetValue( -2, -2 );
-				LIB_ASSERT.equal( value, ( ( LIB_TEST.TestMatrixSize - 2 ) * ( LIB_TEST.TestMatrixSize - 2 ) ), 'mismatched value' );
+				LIB_ASSERT.equal( value, ( ( LIB_TEST.MatrixSize - 2 ) * ( LIB_TEST.MatrixSize - 2 ) ), 'mismatched value' );
 				return;
 			} );
 
 
 		//---------------------------------------------------------------------
-		it( `should get a nonexistent cell`,
+		it( `GetValue( 99, 99 )			- Getting the value of a nonexistent cell returns options.blank_value.`,
 			async function ()
 			{
 				let datatable = LIB_DATATABLE.NewDatatable();
 				LIB_ASSERT.notEqual( datatable, null );
-				let value = datatable.GetValue( 9, 9 );
+				let value = datatable.GetValue( 99, 99 );
 				LIB_ASSERT.equal( value, datatable.blank_value, 'mismatched value' );
 				LIB_ASSERT.equal( datatable.RowCount(), 0, 'mismatched row count' );
 				LIB_ASSERT.equal( datatable.ColumnCount(), 0, 'mismatched column count' );
@@ -99,33 +99,106 @@ describe( `Datatable Cells Tests`,
 
 
 		//---------------------------------------------------------------------
-		it( `should set a value`,
+		it( `SetValue()					- Sets a blank value at the first row and column.`,
 			async function ()
 			{
 				let datatable = LIB_DATATABLE.NewDatatable();
 				LIB_ASSERT.notEqual( datatable, null );
-				datatable.SetValue( 'Hello, World!', 9, 9 );
-				LIB_ASSERT.equal( datatable.GetValue( 9, 9 ), 'Hello, World!', 'mismatched value' );
-				LIB_ASSERT.equal( datatable.RowCount(), 10, 'mismatched row count' );
-				LIB_ASSERT.equal( datatable.ColumnCount(), 10, 'mismatched column count' );
+				datatable.SetValue();
+				LIB_ASSERT.equal( datatable.RowCount(), 1, 'mismatched row count' );
+				LIB_ASSERT.equal( datatable.ColumnCount(), 1, 'mismatched column count' );
+				let value = datatable.GetValue();
+				LIB_ASSERT.equal( value, datatable.options.blank_value, 'mismatched value' );
 				return;
 			} );
 
 
 		//---------------------------------------------------------------------
-		it( `should set several values`,
+		it( `SetValue( 'Hello' )		- Sets the value at the first row and column.`,
 			async function ()
 			{
 				let datatable = LIB_DATATABLE.NewDatatable();
 				LIB_ASSERT.notEqual( datatable, null );
-				datatable.SetValue( 'two', 5, 5 );
-				datatable.SetValue( 'three', 3, 4 );
-				datatable.SetValue( 'one', 9, 9 );
-				LIB_ASSERT.equal( datatable.GetValue( 9, 9 ), 'one', 'mismatched value' );
-				LIB_ASSERT.equal( datatable.GetValue( 5, 5 ), 'two', 'mismatched value' );
-				LIB_ASSERT.equal( datatable.GetValue( 3, 4 ), 'three', 'mismatched value' );
-				LIB_ASSERT.equal( datatable.RowCount(), 10, 'mismatched row count' );
-				LIB_ASSERT.equal( datatable.ColumnCount(), 10, 'mismatched column count' );
+				datatable.SetValue( 'Hello' );
+				LIB_ASSERT.equal( datatable.RowCount(), 1, 'mismatched row count' );
+				LIB_ASSERT.equal( datatable.ColumnCount(), 1, 'mismatched column count' );
+				let value = datatable.GetValue();
+				LIB_ASSERT.equal( value, 'Hello', 'mismatched value' );
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
+		it( `SetValue( 'Hello', 0 )		- Sets the value at the first row and column.`,
+			async function ()
+			{
+				let datatable = LIB_DATATABLE.NewDatatable();
+				LIB_ASSERT.notEqual( datatable, null );
+				datatable.SetValue( 'Hello', 0 );
+				LIB_ASSERT.equal( datatable.RowCount(), 1, 'mismatched row count' );
+				LIB_ASSERT.equal( datatable.ColumnCount(), 1, 'mismatched column count' );
+				let value = datatable.GetValue( 0 );
+				LIB_ASSERT.equal( value, 'Hello', 'mismatched value' );
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
+		it( `SetValue( 'Hello', 0, 0 )	- Sets the value at the first row and column.`,
+			async function ()
+			{
+				let datatable = LIB_DATATABLE.NewDatatable();
+				LIB_ASSERT.notEqual( datatable, null );
+				datatable.SetValue( 'Hello', 0, 0 );
+				LIB_ASSERT.equal( datatable.RowCount(), 1, 'mismatched row count' );
+				LIB_ASSERT.equal( datatable.ColumnCount(), 1, 'mismatched column count' );
+				let value = datatable.GetValue( 0, 0 );
+				LIB_ASSERT.equal( value, 'Hello', 'mismatched value' );
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
+		it( `SetValue( 'Hello', 1, 1 )	- Sets the value at the second row and column.`,
+			async function ()
+			{
+				let datatable = LIB_DATATABLE.NewDatatable();
+				LIB_ASSERT.notEqual( datatable, null );
+				datatable.SetValue( 'Hello', 1, 1 );
+				LIB_ASSERT.equal( datatable.RowCount(), 2, 'mismatched row count' );
+				LIB_ASSERT.equal( datatable.ColumnCount(), 2, 'mismatched column count' );
+				let value = datatable.GetValue( 1, 1 );
+				LIB_ASSERT.equal( value, 'Hello', 'mismatched value' );
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
+		it( `SetValue( 'Hello', -1, -1 )	- Sets the value at the last row and column.`,
+			async function ()
+			{
+				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.ProductMatrix );
+				LIB_ASSERT.notEqual( datatable, null );
+				datatable.SetValue( 'Hello', -1, -1 );
+				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.MatrixSize, 'mismatched row count' );
+				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.MatrixSize, 'mismatched column count' );
+				let value = datatable.GetValue( -1, -1 );
+				LIB_ASSERT.equal( value, 'Hello', 'mismatched value' );
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
+		it( `SetValue( 'Hello', -2, -2 )	- Sets the value at the second to last row and column.`,
+			async function ()
+			{
+				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.ProductMatrix );
+				LIB_ASSERT.notEqual( datatable, null );
+				datatable.SetValue( 'Hello', -2, -2 );
+				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.MatrixSize, 'mismatched row count' );
+				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.MatrixSize, 'mismatched column count' );
+				let value = datatable.GetValue( -2, -2 );
+				LIB_ASSERT.equal( value, 'Hello', 'mismatched value' );
 				return;
 			} );
 

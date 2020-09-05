@@ -33,19 +33,19 @@ npm install @liquicode/lib-datatable
 ## Usage
 
 ### Include the Datatable library in your source code
-```js
+```javascript
 let Datatable = require( '@liquicode/lib-datatable' );
 ```
 
 ### Use the library to create a Datatable Object
-```js
+```javascript
 let table = Datatable.NewDatable();		// Create an empty table with no rows or columns.
 let table = Datatable.FromMatrix( M );	// Create a table from an array of arrays.
 let table = Datatable.FromObjects( O );	// Create a table from an array of objects.
 ```
 
 ### Creating Rows and Columns
-```js
+```javascript
 table.InsertBlankColumns( 5 );		// Add 5 columns to the beginning.
 table.InsertBlankColumns( 5, 0 );	// Add 5 columns to the beginning.
 table.InsertBlankColumns( 5, -1 );	// Add 5 columns to the end.
@@ -56,7 +56,7 @@ table.SetValue( '', 99, 99 );		// Extend the table to 100 rows and 100 columns.
 ```
 
 ### Deleting Rows and Columns
-```js
+```javascript
 table.DeleteColumns( 1, -1 );	// Delete the last column.
 table.DeleteRows( 1, 0 );		// Delete the first row.
 table.DeleteColumns();			// Delete all columns.
@@ -64,7 +64,7 @@ table.DeleteRows();				// Delete all rows.
 ```
 
 ### Getting Cell Values
-```js
+```javascript
 table.GetValue();				// Get the value at the first row and column.
 table.GetValue( 0 );			// Get the value at the first row and column.
 table.GetValue( 0, 0 );			// Get the value at the first row and column.
@@ -73,7 +73,7 @@ table.GetValue( -1, -1 );		// Get the value at the last row and column.
 ```
 
 ### Setting Cell Values
-```js
+```javascript
 table.SetValue( 'home' );			// Set the value at the first row and column.
 table.SetValue( 'home', 0 );		// Set the value at the first row and column.
 table.SetValue( 'home', 0, 0 );		// Set the value at the first row and column.
@@ -88,7 +88,7 @@ table.SetValue( 'end', -1, -1 );	// Set the value at the last row and column.
 ## Techniques
 
 ### Creating a table from an array of arrays
-```js
+```javascript
 let matrix = 
 [
 	[ 1, 2, 3 ],
@@ -110,7 +110,7 @@ table.InsertRows( matrix );
 ```
 
 ### Creating a table from an array of objects
-```js
+```javascript
 let objects = 
 [
 	{ name: "Alice", age: 26, sport: "soccer" },
@@ -132,7 +132,7 @@ Eve   | 23  | swimming
 ```
 
 ### Creating a subtable from an existing table
-```js
+```javascript
 let objects = 
 [
 	{ name: "Alice", age: 26, sport: "soccer" },

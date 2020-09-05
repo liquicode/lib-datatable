@@ -18,8 +18,8 @@ describe( `Datatable Table Tests`,
 			{
 				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.ProductMatrix );
 				LIB_ASSERT.notEqual( datatable, null );
-				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.TestMatrixSize, 'mismatched row count' );
-				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.TestMatrixSize, 'mismatched column count' );
+				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.MatrixSize, 'mismatched row count' );
+				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.MatrixSize, 'mismatched column count' );
 				LIB_ASSERT.equal( datatable.GetValue( 0, 0 ), 0, 'mismatched value at ( 0, 0 )' );
 				LIB_ASSERT.equal( datatable.GetValue( 1, 1 ), 1, 'mismatched value at ( 1, 1 )' );
 				LIB_ASSERT.equal( datatable.GetValue( 1, 2 ), 2, 'mismatched value at ( 1, 2 )' );
@@ -35,8 +35,8 @@ describe( `Datatable Table Tests`,
 			{
 				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.PartialCountMatrix );
 				LIB_ASSERT.notEqual( datatable, null );
-				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.TestMatrixSize, 'mismatched row count' );
-				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.TestMatrixSize, 'mismatched column count' );
+				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.MatrixSize, 'mismatched row count' );
+				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.MatrixSize, 'mismatched column count' );
 				LIB_ASSERT.equal( datatable.GetValue( 0, 0 ), 0, 'mismatched value at ( 0, 0 )' );
 				LIB_ASSERT.equal( datatable.GetValue( 0, 1 ), datatable.blank_value, 'mismatched value at ( 0, 1 )' );
 				LIB_ASSERT.equal( datatable.GetValue( 1, 0 ), 1, 'mismatched value at ( 1, 0 )' );
@@ -52,8 +52,8 @@ describe( `Datatable Table Tests`,
 				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.CountMatrix );
 				LIB_ASSERT.notEqual( datatable, null );
 				datatable.TransposeTable();
-				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.TestMatrixSize, 'mismatched row count' );
-				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.TestMatrixSize, 'mismatched column count' );
+				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.MatrixSize, 'mismatched row count' );
+				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.MatrixSize, 'mismatched column count' );
 				LIB_ASSERT.equal( datatable.GetValue( 0, 0 ), 0, 'mismatched value at ( 0, 0 )' );
 				LIB_ASSERT.equal( datatable.GetValue( 1, 1 ), 33, 'mismatched value at ( 1, 1 )' );
 				LIB_ASSERT.equal( datatable.GetValue( 1, 2 ), 65, 'mismatched value at ( 1, 2 )' );
