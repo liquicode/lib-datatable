@@ -2,12 +2,12 @@
 
 
 const LIB_DATATABLE = require( '../lib/lib-datatable.js' );
-const LIB_TEST = require( './test-matrices.js' );
+const LIB_TEST = require( './test-data/test-matrices.js' );
 const LIB_ASSERT = require( 'assert' );
 
 
 //---------------------------------------------------------------------
-describe( `Datatable Table Tests`,
+describe( `15) Datatable Table Tests`,
 	function ()
 	{
 

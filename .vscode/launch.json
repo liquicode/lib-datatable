@@ -12,9 +12,12 @@
 			"args": [
 				"-u",
 				"bdd",
-				"tests",
+				"tests/*.js",
 				"--timeout",
-				"60000"
+				"0",
+				"--slow",
+				"10",
+				"--colors",
 			],
 			"internalConsoleOptions": "openOnSessionStart",
 			"outputCapture": "std",
