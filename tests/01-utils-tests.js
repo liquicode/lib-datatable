@@ -104,10 +104,10 @@ describe( `01) Utils Tests`,
 					} );
 
 				//---------------------------------------------------------------------
-				it( `can be called without an Index parameter: resolve_index( Count )`,
+				it( `throws an error when called without an Index parameter: resolve_index( Count )`,
 					async function ()
 					{
-						LIB_ASSERT.strictEqual( LIB_UTILS.resolve_index( Count ), 0 );
+						LIB_ASSERT.throws( () => LIB_UTILS.resolve_index( Count ), Error );
 						return;
 					} );
 

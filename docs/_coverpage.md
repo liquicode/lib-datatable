@@ -12,7 +12,7 @@
 
 <hr>
 
-- Simple and lightweight (less than 10kb)
+- Simple and lightweight (less than 12kb)
 - No dependencies - 100% JavaScript
 
 [GitHub](https://github.com/liquicode/lib-datatable)

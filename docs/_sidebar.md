@@ -2,9 +2,14 @@
 
 - lib-datatable Docs
 
-	- [Getting Started](guides/readme.md)
-	- [Table Reference](guides/datatable-table.md)
-	- [Addressing Reference](guides/datatable-addressing.md)
-	- [Cells Reference](guides/datatable-cells.md)
-	- [Columns Reference](guides/datatable-columns.md)
-	- [Rows Reference](guides/datatable-rows.md)
+	- [Read Me](guides/readme.md)
+	- [Functions](guides/function-summary.md)
+	- [Techniques](guides/techniques.md)
+
+	- References
+
+		- [Library Reference](guides/lib-datatable.md)
+		- [Table Reference](guides/datatable-table.md)
+		- [Cell Reference](guides/datatable-cells.md)
+		- [Column Reference](guides/datatable-columns.md)
+		- [Row Reference](guides/datatable-rows.md)
