@@ -23,19 +23,5 @@
 			"outputCapture": "std",
 			"cwd": "${workspaceFolder}",
 		},
-		{
-			"type": "node",
-			"request": "launch",
-			"name": "020-gen-lib-docs",
-			"program": "${workspaceFolder}/build/docs/020-gen-lib-docs.js",
-			"args": [
-				"./docs",
-				"./lib",
-				"./tests",
-			],
-			"internalConsoleOptions": "openOnSessionStart",
-			"outputCapture": "std",
-			"cwd": "${workspaceFolder}",
-		},
 	]
 }
