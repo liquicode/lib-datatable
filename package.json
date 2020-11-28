@@ -1,6 +1,6 @@
 {
 	"name": "@liquicode/lib-datatable",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "A NodeJS library to manipulate an in memory table (array of arrays).",
 	"homepage": "http://lib-datatable.liquicode.com",
 	"license": "MIT",
@@ -52,6 +52,6 @@
 		"run-web-server": "npx here --directory docs --port 4200 --watch 1 --silent",
 		"010-webpack": "bash build/webpack/010-webpack.sh",
 		"810-s3-sync-docs": "bash build/s3/810-s3-sync-docs.sh",
-		"900-npm-publish-public": "bash build/npm/900-npm-publish-public.sh"
+		"910-tag-release-version": "node build/custom/910-tag-release-version.js"
 	}
 }
