@@ -7,22 +7,6 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Test 910",
-			"skipFiles": [
-				"<node_internals>/**"
-			],
-			"program": "${workspaceFolder}/build/npm/910-tag-release-version.js",
-			"cwd": "${workspaceFolder}",
-			"args": [
-				"--test",
-			],
-		},
-		{
-			"name": "------------------------------------------",
-		},
-		{
-			"type": "node",
-			"request": "launch",
 			"name": "Run Tests",
 			"program": "${workspaceFolder}/node_modules/mocha/bin/mocha",
 			"args": [
@@ -38,6 +22,22 @@
 			"internalConsoleOptions": "openOnSessionStart",
 			"outputCapture": "std",
 			"cwd": "${workspaceFolder}",
+		},
+		{
+			"name": "------------------------------------------",
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Test 910",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/build/npm/910-tag-release-version.js",
+			"cwd": "${workspaceFolder}",
+			"args": [
+				"--test",
+			],
 		},
 	]
 }
