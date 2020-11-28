@@ -1,8 +1,8 @@
 "use strict";
 
 
-const LIB_DATATABLE = require( '../lib/lib-datatable.js' );
-const LIB_UTILS = require( '../lib/lib-utils.js' );
+const LIB_DATATABLE = require( '../src/lib-datatable.js' );
+const LIB_UTILS = require( '../src/lib-utils.js' );
 const LIB_ASSERT = require( 'assert' );
 
 const LIB_TEST = require( './test-data/test-matrices.js' );

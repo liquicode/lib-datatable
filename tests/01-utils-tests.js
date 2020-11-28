@@ -1,7 +1,7 @@
 "use strict";
 
 
-const LIB_UTILS = require( '../lib/lib-utils.js' );
+const LIB_UTILS = require( '../src/lib-utils.js' );
 const LIB_ASSERT = require( 'assert' );
 
 
