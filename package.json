@@ -19,6 +19,7 @@
 	"files": [
 		"README.md",
 		"LICENSE",
+		"VERSION",
 		"dist/*",
 		"docs/*",
 		"lib/*",
@@ -48,8 +49,8 @@
 		"webpack-node-externals": "^1.7.2"
 	},
 	"scripts": {
-		"run-tests": "mocha -u bdd tests --timeout 60000",
-		"run-web-server": "npx here --directory docs --port 4200 --watch 1 --silent",
+		"run-tests": "mocha -u bdd tests/*.js --timeout 0 --slow 10 --colors",
+		"run-docs-web-server": "npx here --directory docs --port 4200 --watch 1 --silent",
 		"010-webpack": "bash build/webpack/010-webpack.sh",
 		"810-s3-sync-docs": "bash build/s3/810-s3-sync-docs.sh",
 		"910-tag-release-version": "node build/custom/910-tag-release-version.js"
