@@ -20,9 +20,8 @@
 
 
 <!-- background image -->
-
 <!-- ![]() -->
 
 <!-- background color -->
-
-![color](#cceeff)
+<!-- ![color](#cceeff) -->
+<!-- ![color](#2980B9) -->
