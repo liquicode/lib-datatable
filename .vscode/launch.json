@@ -33,7 +33,7 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/build/npm/910-tag-release-version.js",
+			"program": "${workspaceFolder}/build/custom/910-release-version.js",
 			"cwd": "${workspaceFolder}",
 			"args": [
 				"--test",
