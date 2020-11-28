@@ -60,7 +60,7 @@ The `RowCol()` function will convert any style of addressing into a `RowCol` obj
 ---------------------------------------------------------------------
 
 
-## Function RowCol( AtRow, AtColumn )
+## RowCol( AtRow, AtColumn )
 
 Constructs a `RowCol` object from either two numerical indexes, a spreadsheet like string address, or another RowCol object.
 
@@ -157,7 +157,7 @@ let rowcol = table.RowCol( { col_addr: 'B', row_index: -1 } );
 ---------------------------------------------------------------------
 
 
-## Function GetValue( AtRow, AtColumn )
+## GetValue( AtRow, AtColumn )
 
 Gets the value stored at a specific location within the datatable.
 
@@ -189,7 +189,7 @@ This function returns the value stored in the cell found at the specified locati
 ---------------------------------------------------------------------
 
 
-## Function SetValue( AtRow, AtColumn )
+## SetValue( AtRow, AtColumn )
 
 Sets the value stored at a specific location within the datatable.
 

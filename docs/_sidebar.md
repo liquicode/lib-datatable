@@ -2,7 +2,7 @@
 
 - lib-datatable Docs
 
-	- [Read Me](guides/readme.md)
+	- [About](guides/readme.md)
 	- [Functions](guides/function-summary.md)
 	- [Techniques](guides/techniques.md)
 

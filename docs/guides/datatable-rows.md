@@ -1,15 +1,13 @@
 
 # Datatable Rows
 
-## Overview
-
 A `Datatable` exposes several functions to inspect and manipulate the rows of a table.
 
 
 ---------------------------------------------------------------------
 
 
-## Function DeleteRows( Count, AtRow )
+## DeleteRows( Count, AtRow )
 
 Deletes a number of rows starting at a specific row index.
 
@@ -61,7 +59,7 @@ let n = table.RowCount();  /* n = 5 */
 ---------------------------------------------------------------------
 
 
-## Function ClearRows( Count, AtRow )
+## ClearRows( Count, AtRow )
 
 Clears all cell values in a number of rows starting at a specific row index.
 
@@ -113,7 +111,7 @@ let n = table.RowCount();  /* n = 10 */
 ---------------------------------------------------------------------
 
 
-## Function InsertBlankRows( Count, AtRow )
+## InsertBlankRows( Count, AtRow )
 
 Inserts a number of blank rows starting at a specific row index.
 

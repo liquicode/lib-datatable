@@ -13,6 +13,47 @@ describe( `15) Datatable Table Tests`,
 
 
 		//---------------------------------------------------------------------
+		describe( `Constructor Functions`,
+			async function ()
+			{
+
+				//---------------------------------------------------------------------
+				it( `should create table from matrix`,
+					async function ()
+					{
+						let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.ProductMatrix );
+						LIB_ASSERT.notStrictEqual( datatable, null );
+						LIB_ASSERT.strictEqual( datatable.RowCount(), LIB_TEST.MatrixSize, 'mismatched row count' );
+						LIB_ASSERT.strictEqual( datatable.ColumnCount(), LIB_TEST.MatrixSize, 'mismatched column count' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 0, 0 ), 0, 'mismatched value at ( 0, 0 )' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 1, 1 ), 1, 'mismatched value at ( 1, 1 )' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 1, 2 ), 2, 'mismatched value at ( 1, 2 )' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 2, 1 ), 2, 'mismatched value at ( 2, 1 )' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 2, 2 ), 4, 'mismatched value at ( 2, 2 )' );
+						return;
+					} );
+
+
+				//---------------------------------------------------------------------
+				it( `should create table from a partial matrix`,
+					async function ()
+					{
+						let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.PartialCountMatrix );
+						LIB_ASSERT.notStrictEqual( datatable, null );
+						LIB_ASSERT.strictEqual( datatable.RowCount(), LIB_TEST.MatrixSize, 'mismatched row count' );
+						LIB_ASSERT.strictEqual( datatable.ColumnCount(), LIB_TEST.MatrixSize, 'mismatched column count' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 0, 0 ), 0, 'mismatched value at ( 0, 0 )' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 0, 1 ), datatable.options.blank_value, 'mismatched value at ( 0, 1 )' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 1, 0 ), 1, 'mismatched value at ( 1, 0 )' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 1, 1 ), 2, 'mismatched value at ( 1, 1 )' );
+						return;
+					} );
+
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
 		describe( `RowCount( Count )`,
 			async function ()
 			{
@@ -157,54 +198,91 @@ describe( `15) Datatable Table Tests`,
 
 
 		//---------------------------------------------------------------------
-		it( `should create table from matrix`,
+		describe( `To/From Objects`,
 			async function ()
 			{
-				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.ProductMatrix );
-				LIB_ASSERT.notEqual( datatable, null );
-				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.MatrixSize, 'mismatched row count' );
-				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.MatrixSize, 'mismatched column count' );
-				LIB_ASSERT.equal( datatable.GetValue( 0, 0 ), 0, 'mismatched value at ( 0, 0 )' );
-				LIB_ASSERT.equal( datatable.GetValue( 1, 1 ), 1, 'mismatched value at ( 1, 1 )' );
-				LIB_ASSERT.equal( datatable.GetValue( 1, 2 ), 2, 'mismatched value at ( 1, 2 )' );
-				LIB_ASSERT.equal( datatable.GetValue( 2, 1 ), 2, 'mismatched value at ( 2, 1 )' );
-				LIB_ASSERT.equal( datatable.GetValue( 2, 2 ), 4, 'mismatched value at ( 2, 2 )' );
+
+				//---------------------------------------------------------------------
+				it( `should create a table and column headings from an array of objects`,
+					async function ()
+					{
+						let objects = [
+							{ letter: 'A', number: 1 },
+							{ letter: 'B', number: 2 },
+							{ letter: 'C', number: 3 },
+							{ letter: 'D', number: 4 },
+							{ letter: 'E', number: 5 },
+							{ letter: 'F', number: 6 },
+							{ letter: 'G', number: 7 },
+							{ letter: 'H', number: 8 },
+							{ letter: 'I', number: 9 },
+							{ letter: 'J', number: 10 },
+						];
+						let datatable = LIB_DATATABLE.NewDatatable();
+						LIB_ASSERT.notStrictEqual( datatable, null );
+						datatable.FromObjects( objects );
+						LIB_ASSERT.strictEqual( datatable.RowCount(), 10, 'mismatched row count' );
+						LIB_ASSERT.strictEqual( datatable.ColumnCount(), 2, 'mismatched column count' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 0, 0 ), 'A', 'mismatched value at ( 0, 0 )' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 0, 1 ), 1, 'mismatched value at ( 0, 1 )' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 9, 0 ), 'J', 'mismatched value at ( 9, 0 )' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 9, 1 ), 10, 'mismatched value at ( 9, 1 )' );
+						return;
+					} );
+
+				//---------------------------------------------------------------------
+				it( `should re-create an array of objects`,
+					async function ()
+					{
+						let objects = [
+							{ letter: 'A', number: 1 },
+							{ letter: 'B', number: 2 },
+							{ letter: 'C', number: 3 },
+							{ letter: 'D', number: 4 },
+							{ letter: 'E', number: 5 },
+							{ letter: 'F', number: 6 },
+							{ letter: 'G', number: 7 },
+							{ letter: 'H', number: 8 },
+							{ letter: 'I', number: 9 },
+							{ letter: 'J', number: 10 },
+						];
+						let datatable = LIB_DATATABLE.NewDatatable();
+						LIB_ASSERT.notStrictEqual( datatable, null );
+						datatable.FromObjects( objects );
+						let objects2 = datatable.ToObjects();
+						LIB_ASSERT.strictEqual( JSON.stringify( objects ), JSON.stringify( objects2 ) );
+						return;
+					} );
+
 				return;
 			} );
 
 
 		//---------------------------------------------------------------------
-		it( `should create table from a partial matrix`,
+		describe( `Shaping Functions`,
 			async function ()
 			{
-				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.PartialCountMatrix );
-				LIB_ASSERT.notEqual( datatable, null );
-				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.MatrixSize, 'mismatched row count' );
-				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.MatrixSize, 'mismatched column count' );
-				LIB_ASSERT.equal( datatable.GetValue( 0, 0 ), 0, 'mismatched value at ( 0, 0 )' );
-				LIB_ASSERT.equal( datatable.GetValue( 0, 1 ), datatable.blank_value, 'mismatched value at ( 0, 1 )' );
-				LIB_ASSERT.equal( datatable.GetValue( 1, 0 ), 1, 'mismatched value at ( 1, 0 )' );
-				LIB_ASSERT.equal( datatable.GetValue( 1, 1 ), 2, 'mismatched value at ( 1, 1 )' );
+
+				//---------------------------------------------------------------------
+				it( `should transpose a table`,
+					async function ()
+					{
+						let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.CountMatrix );
+						LIB_ASSERT.notStrictEqual( datatable, null );
+						datatable.TransposeTable();
+						LIB_ASSERT.strictEqual( datatable.RowCount(), LIB_TEST.MatrixSize, 'mismatched row count' );
+						LIB_ASSERT.strictEqual( datatable.ColumnCount(), LIB_TEST.MatrixSize, 'mismatched column count' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 0, 0 ), 0, 'mismatched value at ( 0, 0 )' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 1, 1 ), 33, 'mismatched value at ( 1, 1 )' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 1, 2 ), 65, 'mismatched value at ( 1, 2 )' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 2, 1 ), 34, 'mismatched value at ( 2, 1 )' );
+						LIB_ASSERT.strictEqual( datatable.GetValue( 2, 2 ), 66, 'mismatched value at ( 2, 2 )' );
+						return;
+					} );
+
 				return;
 			} );
 
 
-		//---------------------------------------------------------------------
-		it( `should transpose a table`,
-			async function ()
-			{
-				let datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.CountMatrix );
-				LIB_ASSERT.notEqual( datatable, null );
-				datatable.TransposeTable();
-				LIB_ASSERT.equal( datatable.RowCount(), LIB_TEST.MatrixSize, 'mismatched row count' );
-				LIB_ASSERT.equal( datatable.ColumnCount(), LIB_TEST.MatrixSize, 'mismatched column count' );
-				LIB_ASSERT.equal( datatable.GetValue( 0, 0 ), 0, 'mismatched value at ( 0, 0 )' );
-				LIB_ASSERT.equal( datatable.GetValue( 1, 1 ), 33, 'mismatched value at ( 1, 1 )' );
-				LIB_ASSERT.equal( datatable.GetValue( 1, 2 ), 65, 'mismatched value at ( 1, 2 )' );
-				LIB_ASSERT.equal( datatable.GetValue( 2, 1 ), 34, 'mismatched value at ( 2, 1 )' );
-				LIB_ASSERT.equal( datatable.GetValue( 2, 2 ), 66, 'mismatched value at ( 2, 2 )' );
-				return;
-			} );
-
-
+		return;
 	} );

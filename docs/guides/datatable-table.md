@@ -1,16 +1,13 @@
 
 # Datatable Table
 
-
-## Overview
-
 Functions to manipulate a `Datatable`.
 
 
 ---------------------------------------------------------------------
 
 
-## Function RowCount( Count )
+## RowCount( Count )
 
 Used to get and set the number of rows in a `Datatable`.
 
@@ -50,7 +47,7 @@ let n = table.RowCount();  /* n = 10 */
 ---------------------------------------------------------------------
 
 
-## Function ColumnCount( Count )
+## ColumnCount( Count )
 
 Used to get and set the number of columns in a `Datatable`.
 
@@ -90,7 +87,7 @@ let n = table.ColumnCount();  /* n = 5 */
 ---------------------------------------------------------------------
 
 
-## Function SetSize( RowCount, ColumnCount )
+## SetSize( RowCount, ColumnCount )
 
 Used to set the number of rows and/or columns in a `Datatable`.
 Under the hood, this function simply calls `RowCount()` and `ColumnCount()`
@@ -123,5 +120,66 @@ table.SetSize( 10, 5 );
 let x = table.RowCount();     /* x = 10 */
 let y = table.ColumnCount();  /* y = 5 */
 ```
+
+
+---------------------------------------------------------------------
+
+
+## GetMatrix( FromRow, FromColumn, ToRow, ToColumn )
+
+### GetMatrix Invocation
+
+### GetMatrix Return Value
+
+### GetMatrix Usage
+
+
+---------------------------------------------------------------------
+
+
+## SetMatrix( Matrix, ToRow, ToColumn )
+
+### SetMatrix Invocation
+
+### SetMatrix Return Value
+
+### SetMatrix Usage
+
+
+---------------------------------------------------------------------
+
+
+## FromObjects( Objects )
+
+### FromObjects Invocation
+
+### FromObjects Return Value
+
+### FromObjects Usage
+
+
+
+---------------------------------------------------------------------
+
+
+## ToObjects()
+
+### ToObjects Invocation
+
+### ToObjects Return Value
+
+### ToObjects Usage
+
+
+---------------------------------------------------------------------
+
+
+## TransposeTable()
+
+### TransposeTable Invocation
+
+### TransposeTable Return Value
+
+### TransposeTable Usage
 
 

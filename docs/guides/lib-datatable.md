@@ -1,16 +1,13 @@
 
 # lib-datatable
 
-
-## Overview
-
 Constructor functions to create instances of a `Datatable`.
 
 
 ---------------------------------------------------------------------
 
 
-## function NewDatatable()
+## NewDatatable()
 
 Creates an empty `Datatable` with no rows or columns.
 
@@ -18,7 +15,7 @@ Creates an empty `Datatable` with no rows or columns.
 ---------------------------------------------------------------------
 
 
-## function NewBlankDatatable( RowCount, ColumnCount )
+## NewBlankDatatable( RowCount, ColumnCount )
 
 Creates an empty `Datatable` with the requested rows and columns.
 

@@ -1,15 +1,13 @@
 
 # Datatable Columns
 
-## Overview
-
 A `Datatable` exposes several functions to inspect and manipulate the columns of a table.
 
 
 ---------------------------------------------------------------------
 
 
-## Function DeleteColumns( Count, AtColumn )
+## DeleteColumns( Count, AtColumn )
 
 Deletes a number of columns starting at a specific column index.
 
@@ -61,7 +59,7 @@ let n = table.ColumnCount();  /* n = 5 */
 ---------------------------------------------------------------------
 
 
-## Function ClearColumns( Count, AtColumn )
+## ClearColumns( Count, AtColumn )
 
 Clears all cell values in a number of columns starting at a specific column index.
 
@@ -113,7 +111,7 @@ let n = table.ColumnCount();  /* n = 10 */
 ---------------------------------------------------------------------
 
 
-## Function InsertBlankColumns( Count, AtColumn )
+## InsertBlankColumns( Count, AtColumn )
 
 Inserts a number of blank columns starting at a specific column index.
 
