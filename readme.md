@@ -1,5 +1,5 @@
 
-# lib-datatable (v0.0.6)
+# lib-datatable (v0.0.7)
 
 A NodeJS library to manipulate an in memory table (array of arrays).
 
