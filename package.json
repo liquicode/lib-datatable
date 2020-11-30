@@ -15,14 +15,14 @@
 			"homepage": "http://liquicode.com"
 		}
 	],
-	"main": "lib/lib-datatable.js",
+	"main": "src/lib-datatable.js",
 	"files": [
 		"README.md",
 		"LICENSE",
 		"VERSION",
 		"dist/*",
 		"docs/*",
-		"lib/*",
+		"src/*",
 		"tests/*"
 	],
 	"ignore": [
