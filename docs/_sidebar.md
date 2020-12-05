@@ -4,22 +4,23 @@
 
 - lib-datatable Docs
 
-	- [About](guides/readme.md)
+	- [About](external/readme.md)
 	- [Functions](guides/function-summary.md)
 	- [Techniques](guides/techniques.md)
 
 <hr>
 
-- References
+- Library API
 
-	- [Library Reference](guides/lib-datatable.md)
-	- [Table Reference](guides/datatable-table.md)
-	- [Cell Reference](guides/datatable-cells.md)
-	- [Column Reference](guides/datatable-columns.md)
-	- [Row Reference](guides/datatable-rows.md)
+	- [Library Reference](api/lib-datatable.md)
+	- [Table Reference](api/datatable-table.md)
+	- [Cell Reference](api/datatable-cells.md)
+	- [Column Reference](api/datatable-columns.md)
+	- [Row Reference](api/datatable-rows.md)
 
 <hr>
 
 - Information
 
-	- [Testing Output](testing-output.md)
+	- [Testing Output](external/testing-output.md)
+	- [Software License](external/license.md)

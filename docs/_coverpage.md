@@ -16,7 +16,7 @@
 - No dependencies - 100% JavaScript
 
 [GitHub](https://github.com/liquicode/lib-datatable)
-[Get Started](guides/readme.md)
+[Get Started](external/readme.md)
 
 
 <!-- background image -->
