@@ -47,6 +47,7 @@ exports.DeleteColumns =
 
 		// Splice column_headings.
 		this.data.column_headings.splice( rowcol.col_index, Count );
+		this.data.column_infos.splice( rowcol.col_index, Count );
 
 		// Splice rows.
 		for ( let row_index = 0; row_index < this.data.rows.length; row_index++ )
@@ -142,23 +143,29 @@ exports.InsertBlankColumns =
 		let rowcol = this.RowCol( AtColumn );
 
 		// Splice column_headings.
-		let blank_columns = [];
-		for ( let index = 0; index < Count; index++ ) { blank_columns.push( '' ); }
-		this.data.column_headings.splice( rowcol.col_index, 0, ...blank_columns );
+		let blank_column_headings = [];
+		let blank_column_infos = [];
+		for ( let index = 0; index < Count; index++ ) 
+		{
+			blank_column_headings.push( '' );
+			blank_column_infos.push( {} );
+		}
+		this.data.column_headings.splice( rowcol.col_index, 0, ...blank_column_headings );
+		this.data.column_infos.splice( rowcol.col_index, 0, ...blank_column_infos );
 
 		// Splice rows.
-		blank_columns = [];
-		for ( let index = 0; index < Count; index++ ) { blank_columns.push( this.options.blank_value ); }
+		let blank_values = [];
+		for ( let index = 0; index < Count; index++ ) { blank_values.push( this.options.blank_value ); }
 		for ( let row_index = 0; row_index < this.data.rows.length; row_index++ )
 		{
 			let row = this.data.rows[ row_index ];
 			if ( insert_after )
 			{
-				row.splice( rowcol.col_index + 1, 0, ...LIB_UTILS.clone( blank_columns ) );
+				row.splice( rowcol.col_index + 1, 0, ...LIB_UTILS.clone( blank_values ) );
 			}
 			else
 			{
-				row.splice( rowcol.col_index, 0, ...LIB_UTILS.clone( blank_columns ) );
+				row.splice( rowcol.col_index, 0, ...LIB_UTILS.clone( blank_values ) );
 			}
 		}
 
@@ -178,9 +185,11 @@ exports.InsertBlankColumns =
 
 //---------------------------------------------------------------------
 /**
- * Inserts a number of blank columns starting at a specific column index.
+ * Sets or gets the heading for a specific column.
  * @param {any} AtColumn Must be one of: A zero based column index, a string address, or a RowCol object.
  * @param {string} Heading The heading to set for the column.
+ * 		Omit this parameter or pass `null` to only get the column heading.
+ * @return {string} The heading at the specified column.
  */
 exports.ColumnHeading =
 	function ColumnHeading( AtColumn, Heading = null )
@@ -205,5 +214,48 @@ exports.ColumnHeading =
 
 		// Return the column heading.
 		return this.data.column_headings[ rowcol.col_index ];
+	};
+
+
+//=====================================================================
+//=====================================================================
+//
+//		COLUMN INFO
+//
+//=====================================================================
+//=====================================================================
+
+
+//---------------------------------------------------------------------
+/**
+ * Sets or gets the info for a specific column.
+ * @param {any} AtColumn Must be one of: A zero based column index, a string address, or a RowCol object.
+ * @param {string} Info The info to set for the column.
+ * 		Omit this parameter or pass `null` to only get the column info.
+ * @return {string} The info at the specified column.
+ */
+exports.ColumnInfo =
+	function ColumnInfo( AtColumn, Info = null )
+	{
+		// Validate arguments.
+		if ( LIB_UTILS.value_missing( AtColumn ) ) { throw new Error( `AtColumn is required.` ); }
+
+		// Convert index to a RowCol
+		if ( typeof AtColumn === 'number' )
+		{
+			AtColumn = { col_index: AtColumn };
+		}
+		else if ( typeof AtColumn === 'string' )
+		{ AtColumn = { col_addr: AtColumn }; }
+		let rowcol = this.RowCol( AtColumn );
+
+		if ( !LIB_UTILS.value_missing( Info ) )
+		{
+			// Set the column info.
+			this.data.column_infos[ rowcol.col_index ] = Info;
+		}
+
+		// Return the column info.
+		return this.data.column_infos[ rowcol.col_index ];
 	};
 

@@ -1,60 +1,9 @@
 
 # Datatable Cells
 
-
-## Overview
-
 `lib-datatable` supports several different types of addressing schemes.
 At its core, the library natively uses zero-based indexes.
 So `row[0]` is the first row and `row[rowcount-1]` is the last row.
-
-
-## Cell Addressing
-
-***Spreadsheet Style Cell Addressing***
-
-Spreadsheet programs utilize an alternate way of addressing cells by
-specifying a combination of column name and row number, as in 'A1'.
-`lib-datatable` also supports this popular style of addressing.
-
-***RowIndex vs RowNumber and ColIndex vs ColNumber***
-
-When referring to addressing style and anddress components, we make a distinction
-between an `Index` and a `Number`.
-An `Index` is always zero-based and a `Number` is always one-based.
-So `RowIndex=0` and `RowNumber=1` both refer to the same row (i.e. the first row).
-The same is true for any `ColumnIndex` and `ColumnNumber` references.
-These two terms are used frequently throughout this documentation and it
-is important to understand the distinction.
-
-***Negative Index Values In Addressing***
-
-When specifying `RowIndex` and `ColIndex` parameters for `lib-datatable`
-functions, be aware that you are able to specify negative index values
-to refer to items in reverse order.
-A `RowIndex=-1` would refer to the last row and `RowIndex=-RowCount` would
-refer to the first row.
-
-
----------------------------------------------------------------------
-
-
-## The RowCol Object
-
-This object can be used to represent all three types of addressing that `lib-datatable` supports.
-The `RowCol()` function will convert any style of addressing into a `RowCol` object.
-
-```javascript
-{
-	row_num,        // A row number (offset by row_base 1)
-	row_addr,       // A row letter corresponding to row_num
-	row_index,      // A zero based row index within rows
-	col_num,        // A col number (offset by col_base 1)
-	col_addr,       // A col letter corresponding to col_num
-	col_index,      // A zero based col index within cols
-}
-
-```
 
 
 ---------------------------------------------------------------------
@@ -62,7 +11,26 @@ The `RowCol()` function will convert any style of addressing into a `RowCol` obj
 
 ## RowCol( AtRow, AtColumn )
 
-Constructs a `RowCol` object from either two numerical indexes, a spreadsheet like string address, or another RowCol object.
+Constructs a `RowCol` object from either two numerical indexes, a spreadsheet like string address, or another `RowCol` object.
+
+
+### The RowCol Object
+
+This object can be used to represent all three types of addressing that `lib-datatable` supports.
+The `RowCol()` function will convert any style of addressing into a `RowCol` object.
+
+```javascript
+{
+	row_num,        // A row number (offset by row_base of 1)
+	row_addr,       // A row letter corresponding to row_num
+	row_index,      // A zero based row index within rows
+	col_num,        // A col number (offset by col_base of 1)
+	col_addr,       // A col letter corresponding to col_num
+	col_index,      // A zero based col index within cols
+}
+```
+
+Read more about the `RowCol` object [here](api/datatable-structures?id=the-rowcol-object).
 
 
 ### RowCol Invocation
@@ -91,66 +59,38 @@ This function returns a `RowCol` object.
 
 ### RowCol Usage
 
-Let's start out with a basic datatable called `table`:
-```javascript
-const LibDatatable = require( '@liquicode/lib-datatable' );
-let table = LibDatatable.FromMatrix( 
-	[
-		[ 1, 2, 3 ],
-		[ 4, 5, 6 ],
-		[ 7, 8, 9 ]
-	]
-);
-```
-
-***Index Style Addressing***
-
-Supply numerical index values for both `RowIndex` and `ColIndex` parameters:
 
 ```javascript
-// Get the first row and the second column.
-let rowcol = table.RowCol( 0, 1 );
-/* rowcol =
-	row_num: 1,     col_num: 2,
-	row_addr: 'A',  col_addr: 'B',
-	row_index: 0,   col_index: 1,
-*/
+// Get the first row and first column.
+let rowcol = table.RowCol( 0, 0 );
+// rowcol =
+// 		row_num: 1, row_addr: 'A', row_index: 0,
+// 		col_num: 1, col_addr: 'A', col_index: 0,
 
-// Get the last row and the last column.
-let rowcol = table.RowCol( -1, -1 );
-/* rowcol =
-	row_num: 3,     col_num: 3,
-	row_addr: 'C',  col_addr: 'C',
-	row_index: 2,   col_index: 2,
-*/
-```
+// Get the first row and first column.
+let rowcol = table.RowCol( 'A', 0 );
+// rowcol =
+// 		row_num: 1, row_addr: 'A', row_index: 0,
+// 		col_num: 1, col_addr: 'A', col_index: 0,
 
-***Spreadsheet Style Addressing***
-
-You can address a table location using a spreadsheet like address string
-which contains the `col_addr` component followed by the `row_num` component.
-(e.g. 'A1' or 'BD12')
-
-```javascript
-// Get the first row and the first column.
+// Get the first row and first column.
 let rowcol = table.RowCol( 'A1' );
-/* rowcol =
-	row_num: 1,     col_num: 1,
-	row_addr: 'A',  col_addr: 'A',
-	row_index: 0,   col_index: 0,
-*/
-```
+// rowcol =
+// 		row_num: 1, row_addr: 'A', row_index: 0,
+// 		col_num: 1, col_addr: 'A', col_index: 0,
 
-***Mixed Style Addressing***
+// Get the first row and first column.
+let rowcol = table.RowCol( { row_num: 1, col_num: 1 } );
+// rowcol =
+// 		row_num: 1, row_addr: 'A', row_index: 0,
+// 		col_num: 1, col_addr: 'A', col_index: 0,
 
-```javascript
-// Get the last row and the second column.
-let rowcol = table.RowCol( { col_addr: 'B', row_index: -1 } );
-/* rowcol =
-	row_num: 3,     col_num: 2,
-	row_addr: 'C',  col_addr: 'B',
-	row_index: 2,   col_index: 1,
-*/
+// Get the second row and first column.
+let rowcol = table.RowCol( 1, 0 );
+// rowcol =
+// 		row_num: 2, row_addr: 'B', row_index: 1,
+// 		col_num: 1, col_addr: 'A', col_index: 0,
+
 ```
 
 
@@ -185,11 +125,37 @@ This function returns the value stored in the cell found at the specified locati
 
 ### GetValue Usage
 
+```javascript
+// Create a 3x3 test table.
+const LibDatatable = require( '@liquicode/lib-datatable' );
+let table = LibDatatable.FromMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ] ] );
+
+// First row, first column
+let value = table.GetValue( 0, 0 );      // value === 1
+let value = table.GetValue( 'A', 'A' );  // value === 1
+let value = table.GetValue( 'A1' );      // value === 1
+
+// First row, last column
+let value = table.GetValue( 0, -1 );     // value === 3
+let value = table.GetValue( 'A', 'C' );  // value === 3
+let value = table.GetValue( 'C1' );      // value === 3
+
+// Last row, first column
+let value = table.GetValue( -1, 0 );     // value === 7
+let value = table.GetValue( -1, 'A' );   // value === 7
+let value = table.GetValue( 'A3' );      // value === 7
+
+// Last row, last column
+let value = table.GetValue( -1, -1 );    // value === 9
+let value = table.GetValue( 'C', 'C' );  // value === 9
+let value = table.GetValue( 'C3' );      // value === 9
+```
+
 
 ---------------------------------------------------------------------
 
 
-## SetValue( AtRow, AtColumn )
+## SetValue( Value, AtRow, AtColumn )
 
 Sets the value stored at a specific location within the datatable.
 
@@ -217,4 +183,36 @@ This function does not return a value.
 
 ### SetValue Usage
 
+```javascript
+// Create a 3x3 test table.
+const LibDatatable = require( '@liquicode/lib-datatable' );
+let table = LibDatatable.NewBlankDatatable( 3, 3 );
+
+// First row, first column, value = 1
+table.SetValue( 1, 0, 0 );
+table.SetValue( 1, 'A', 'A' );
+table.SetValue( 1, 'A1' );
+
+// First row, last column, value = 3
+table.SetValue( 3, 0, -1 );
+table.SetValue( 3, 'A', 'C' );
+table.SetValue( 3, 'C1' );
+
+// Last row, first column, value = 7
+table.SetValue( 7, -1, 0 );
+table.SetValue( 7, 'C', 'A' );
+table.SetValue( 7, 'A3' );
+
+// Last row, last column, value = 9
+table.SetValue( 9, -1, -1 );
+table.SetValue( 9, 'C', 'C' );
+table.SetValue( 9, 'C3' );
+
+// table = 
+// 	[
+// 		[  1, '',  3 ],
+// 		[ '', '', '' ],
+// 		[  7, '',  9 ],
+// 	]
+```
 

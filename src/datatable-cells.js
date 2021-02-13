@@ -241,7 +241,10 @@ exports.SetValue =
 
 		// Extend the column_headings to include ColIndex.
 		while ( rowcol.col_index >= this.data.column_headings.length )
-		{ this.data.column_headings.push( '' ); }
+		{
+			this.data.column_headings.push( '' );
+			this.data.column_infos.push( {} );
+		}
 
 		// Extend the row to include ColIndex.
 		while ( rowcol.col_index >= row.length )

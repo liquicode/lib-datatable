@@ -13,10 +13,10 @@ This is an array of rows, each of which is composed of an array of cell values.
 There is no restriction on the content of a Cell, it can be of any nativa data
 type (e.g. number, string) or even a complex object.
 
-A `Datatable` also maintains an array of column headings (`data.column_headings`).
+A `Datatable` also maintains an array of column headings (`data.column_headings`)and application defined info objects (`data.column_infos`).
 Column headings are not required for the primary functions of a `Datatable` but are
 used when converting a `Datatable` to and from an array of Javascript or JSON objects.
-In such cases, a `Datatable` column corresponds to a field within the object.
+In such cases, a `Datatable` column heading corresponds to a field within the source JSON object.
 
 Since the internal representation of a `Datatable` is an array of arrays with an
 optional array of column metadata, a significant amount of overhead is avoided as
@@ -34,7 +34,7 @@ for serialization and transmission of large data.
 
 Install via NPM:
 ```bash
-npm install @liquicode/lib-datatable
+npm install --save @liquicode/lib-datatable
 ```
 
 

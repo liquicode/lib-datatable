@@ -205,6 +205,7 @@ exports.InsertRows =
 			while ( col_count > this.data.column_headings.length )
 			{
 				this.data.column_headings.push( '' );
+				this.data.column_infos.push( {} );
 			}
 		}
 

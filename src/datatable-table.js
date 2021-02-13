@@ -77,9 +77,11 @@ exports.ColumnCount =
 			while ( Count > this.data.column_headings.length )
 			{
 				this.data.column_headings.push( '' );
+				this.data.column_infos.push( {} );
 			}
 			// Remove column headers.
 			this.data.column_headings.splice( Count );
+			this.data.column_infos.splice( Count );
 		}
 
 		// Return the column count.
@@ -130,14 +132,14 @@ exports.SetSize =
 
 //---------------------------------------------------------------------
 exports.GetMatrix =
-	function GetMatrix( FromRow, FromColumn, ToRow, ToColumn )
+	function GetMatrix( FromRowIndex, FromColumnIndex, ToRowIndex, ToColumnIndex )
 	{
 		// Copy values.
 		let sub_rows = [];
-		for ( let row_index = FromRow; row_index <= ToRow; row_index++ )
+		for ( let row_index = FromRowIndex; row_index <= ToRowIndex; row_index++ )
 		{
 			let new_row = [];
-			for ( let col_index = FromColumn; col_index <= ToColumn; col_index++ )
+			for ( let col_index = FromColumnIndex; col_index <= ToColumnIndex; col_index++ )
 			{
 				let value = this.GetValue( row_index, col_index );
 				new_row.push( value );
@@ -220,6 +222,7 @@ exports.FromObjects =
 				if ( col_index < 0 )
 				{
 					this.data.column_headings.push( keys[ key_index ] );
+					this.data.column_infos.push( {} );
 					col_index = this.data.column_headings.length - 1;
 				}
 				let value = obj[ keys[ key_index ] ];
@@ -273,9 +276,13 @@ exports.TransposeTable =
 	function TransposeTable()
 	{
 		// Create the new column_headings.
-		let new_cols = [];
+		let new_column_headings = [];
+		let new_column_infos = [];
 		for ( let index = 0; index < this.data.rows.length; index++ )
-		{ new_cols.push( '' ); }
+		{
+			new_column_headings.push( '' );
+			new_column_infos.push( {} );
+		}
 
 		// Create the new rows.
 		let new_rows = [];
@@ -290,7 +297,8 @@ exports.TransposeTable =
 		}
 
 		// Set the new table.
-		this.data.column_headings = new_cols;
+		this.data.column_headings = new_column_headings;
+		this.data.column_infos = new_column_infos;
 		this.data.rows = new_rows;
 
 		// Return, OK.

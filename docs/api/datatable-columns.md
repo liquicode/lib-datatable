@@ -165,3 +165,121 @@ table.InsertBlankColumns( 2, 'C' );
 let n = table.ColumnCount();  /* n = 9 */
 ```
 
+
+---------------------------------------------------------------------
+
+
+## ColumnHeading( AtColumn, Heading )
+
+Sets or gets the heading for a specific column.
+
+
+### ColumnHeading Invocation
+
+- `ColumnHeading( ColIndex, Heading )`:
+	- `ColIndex` is a numerical zero based column index (e.g. `3`),
+		or a negative offset from the end of the table.
+	- `Heading` is the new column heading string.
+- `ColumnHeading( Address, Heading )`
+	- `Address` is a spreadsheet style column address (e.g. `'C'`)
+	- `Heading` is the new column heading string.
+- `ColumnHeading( RowCol, Heading )`
+	- `RowCol` is a `RowCol` object with one of the column fields supplied
+		(e.g. `{col_num: 4}`).
+	- `Heading` is the new column heading string.
+
+Whenever a column index is specified as a negative integer,
+either through `ColIndex` or `RowCol.col_index`,
+this operation will affect the column at that index and any columns to the right of it.
+
+Omit the `Heading` parameter or pass `null` to only get the column heading.
+
+
+### ColumnHeading Return Value
+
+This function returns the `Heading` associated with the specified column.
+
+
+### ColumnHeading Usage
+
+```javascript
+// Get a blank 5x5 table.
+const LibDatatable = require( '@liquicode/lib-datatable' );
+let table = LibDatatable.NewDatatable();
+table.SetSize( 5, 5 );
+
+// Set the heading of the first column.
+table.ColumnHeading( 0, 'first' );
+
+// Get the heading of the first column.
+heading = table.ColumnHeading( 'A' );
+// heading = 'first'
+
+// Set the heading of the second column.
+table.ColumnHeading( { col_num: 2 }, 'second' );
+
+// Set the heading of the last column.
+table.ColumnHeading( -1, 'last' );
+
+// Get the heading of the last column.
+heading = table.ColumnHeading( 'E' );
+// heading = 'last'
+```
+
+
+---------------------------------------------------------------------
+
+
+## ColumnInfo( AtColumn, Info )
+
+Sets or gets the heading for a specific column.
+
+
+### ColumnInfo Invocation
+
+- `ColumnInfo( ColIndex, Info )`:
+	- `ColIndex` is a numerical zero based column index (e.g. `3`),
+		or a negative offset from the end of the table.
+	- `Info` is the new column heading string.
+- `ColumnInfo( Address, Info )`
+	- `Address` is a spreadsheet style column address (e.g. `'C'`)
+	- `Info` is the new column heading string.
+- `ColumnInfo( RowCol, Info )`
+	- `RowCol` is a `RowCol` object with one of the column fields supplied
+		(e.g. `{col_num: 4}`).
+	- `Info` is the new column heading string.
+
+Whenever a column index is specified as a negative integer,
+either through `ColIndex` or `RowCol.col_index`,
+this operation will affect the column at that index and any columns to the right of it.
+
+Omit the `Info` parameter or pass `null` to only get the column heading.
+
+
+### ColumnInfo Return Value
+
+This function returns the `Info` associated with the specified column.
+
+
+### ColumnInfo Usage
+
+```javascript
+// Get a blank 5x5 table.
+const LibDatatable = require( '@liquicode/lib-datatable' );
+let table = LibDatatable.NewDatatable();
+table.SetSize( 5, 5 );
+
+// Set the info of the first column.
+table.ColumnInfo( 0, { is_first: true } );
+
+// Get the info of the first column.
+info = table.ColumnInfo( 0 );
+// info = { is_first: true }
+
+// Set the info of the last column.
+table.ColumnInfo( -1, { is_last: true } );
+
+// Get the info of the last column.
+info = table.ColumnInfo( 'E' );
+// info = { is_last: true }
+```

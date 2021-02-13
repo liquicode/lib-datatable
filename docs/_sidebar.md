@@ -5,18 +5,19 @@
 - lib-datatable Docs
 
 	- [About](external/readme.md)
-	- [Functions](guides/function-summary.md)
+	- [Concepts](guides/concepts-structures.md)
 	- [Techniques](guides/techniques.md)
 
 <hr>
 
 - Library API
 
-	- [Library Reference](api/lib-datatable.md)
-	- [Table Reference](api/datatable-table.md)
-	- [Cell Reference](api/datatable-cells.md)
-	- [Column Reference](api/datatable-columns.md)
-	- [Row Reference](api/datatable-rows.md)
+	- [Function Summary](api/function-summary.md)
+	- [Constructors](api/lib-datatable.md)
+	- [Table Functions](api/datatable-table.md)
+	- [Cell Functions](api/datatable-cells.md)
+	- [Column Functions](api/datatable-columns.md)
+	- [Row Functions](api/datatable-rows.md)
 
 <hr>
 

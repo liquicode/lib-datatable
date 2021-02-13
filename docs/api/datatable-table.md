@@ -125,13 +125,38 @@ let y = table.ColumnCount();  /* y = 5 */
 ---------------------------------------------------------------------
 
 
-## GetMatrix( FromRow, FromColumn, ToRow, ToColumn )
+## GetMatrix( FromRowIndex, FromColumnIndex, ToRowIndex, ToColumnIndex )
+
+Gets a matrix (array of array of values) specified by the given indexes.
+
 
 ### GetMatrix Invocation
 
+This function departs from the rest of the library as only zero-based index values are allowed to specify the affected cells.
+
+- `GetMatrix( FromRowIndex, FromColumnIndex, ToRowIndex, ToColumnIndex )`
+
+
 ### GetMatrix Return Value
 
+This function returns an array of array of values found at the specified location.
+
+
 ### GetMatrix Usage
+
+```javascript
+// Create a 3x3 test table.
+const LibDatatable = require( '@liquicode/lib-datatable' );
+let table = LibDatatable.FromMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ] ] );
+
+// Get a subset of the cells.
+let matrix = table.GetMatrix( 1, 1, 2, 2 );
+// matrix = 
+// 	[
+// 		[ 5, 6 ],
+// 		[ 8, 9 ],
+// 	]
+```
 
 
 ---------------------------------------------------------------------
@@ -139,11 +164,38 @@ let y = table.ColumnCount();  /* y = 5 */
 
 ## SetMatrix( Matrix, ToRow, ToColumn )
 
+Given an array of array of values, copy those values into the datatable starting at the specified location.
+
+
 ### SetMatrix Invocation
+
+This function can be called in three different ways:
+
+- `SetMatrix( Matrix, RowIndex, ColIndex )`: Sets the value using two zero based numerical indexes.
+
+- `SetMatrix( Matrix, Address )`: Sets the value using a spreadsheet style address.
+
+- `SetMatrix( Matrix, RowCol )`: Sets the value using any combination of addressing styles.
+
 
 ### SetMatrix Return Value
 
+This function does not return a value.
+
+
 ### SetMatrix Usage
+
+```javascript
+// Create a blank datatable.
+const LibDatatable = require( '@liquicode/lib-datatable' );
+let table = LibDatatable.NewDatatable();
+
+// Create a 3x3 test matrix.
+let matrix = [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ] ];
+
+// Set the datatable from a values in the matrix.
+table.SetMatrix( matrix, 0, 0 );
+```
 
 
 ---------------------------------------------------------------------
@@ -151,12 +203,31 @@ let y = table.ColumnCount();  /* y = 5 */
 
 ## FromObjects( Objects )
 
+Replaces the content of the datatable with columns and values found in the given objects.
+Note that this function replaces all data contained in the datatable.
+
+
 ### FromObjects Invocation
+
+The `Objects` parameter is required, so there is only one way to call this:
+
+- `FromObjects( Objects )`:
+	- `Objects` is an array of objects.
+
 
 ### FromObjects Return Value
 
+This object does not return a value.
+
+
 ### FromObjects Usage
 
+```javascript
+// Create a blank datatable.
+const LibDatatable = require( '@liquicode/lib-datatable' );
+let table = LibDatatable.NewDatatable();
+
+```
 
 
 ---------------------------------------------------------------------
@@ -164,11 +235,64 @@ let y = table.ColumnCount();  /* y = 5 */
 
 ## ToObjects()
 
+Converts the datatable values into an array of JSON objects.
+Column headings will be used for JSON field names if available.
+
+
 ### ToObjects Invocation
+
+This function takes no parameters, so there is only one way to call this function:
+
+- `ToObjects()`
+
 
 ### ToObjects Return Value
 
+This function returns an array of JSON objects.
+
+
 ### ToObjects Usage
+
+```javascript
+// Create a blank datatable.
+const LibDatatable = require( '@liquicode/lib-datatable' );
+let table = LibDatatable.NewDatatable();
+
+// Will return an empty object of no data exists.
+json = table.ToObjects();
+// json = {}
+
+// Add some test data.
+let test_matrix = 
+[
+	[ 'Alice', 23 ],
+	[ 'Bob', 25 ],
+	[ 'Eve', 24 ],
+]
+table.InsertRows( test_matrix, 0 );
+
+// Convert table to an array of json objects.
+json = table.ToObjects();
+// json = 
+// 	{
+// 		{ column0: 'Alice', column1: 23 },
+// 		{ column0: 'Bob',   column1: 25 },
+// 		{ column0: 'Eve',   column1: 24 },
+// 	}
+
+// Add some columns.
+table.ColumnHeading( 0, 'Name' );
+table.ColumnHeading( 1, 'Age' );
+
+// Convert table to an array of json objects.
+json = table.ToObjects();
+// json = 
+// 	{
+// 		{ Name: 'Alice', Age: 23 },
+// 		{ Name: 'Bob',   Age: 25 },
+// 		{ Name: 'Eve',   Age: 24 },
+// 	}
+```
 
 
 ---------------------------------------------------------------------
@@ -176,10 +300,43 @@ let y = table.ColumnCount();  /* y = 5 */
 
 ## TransposeTable()
 
+This function transposes the datatable by switching values from rows to columns.
+
+
 ### TransposeTable Invocation
+
+This function takes no parameters, so there is only one way to call this function:
+
+- `TransposeTable()`
+
 
 ### TransposeTable Return Value
 
+This function does not return a value.
+
+
 ### TransposeTable Usage
 
+```javascript
+// Create a blank datatable.
+const LibDatatable = require( '@liquicode/lib-datatable' );
+let table = LibDatatable.FromMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ] ] );
+
+// table =
+// 	[
+// 		[ 1, 2, 3 ],
+// 		[ 4, 5, 6 ],
+// 		[ 7, 8, 9 ],
+// 	]
+
+table.TransposeTable();
+
+// table =
+// 	[
+// 		[ 1, 4, 7 ],
+// 		[ 2, 5, 8 ],
+// 		[ 3, 6, 9 ],
+// 	]
+
+```
 

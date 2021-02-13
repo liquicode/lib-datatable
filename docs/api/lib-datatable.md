@@ -12,12 +12,35 @@ Constructor functions to create instances of a `Datatable`.
 Creates an empty `Datatable` with no rows or columns.
 
 
+### Examples
+
+```javascript
+// Get a blank 5x5 table.
+const LibDatatable = require( '@liquicode/lib-datatable' );
+let table = LibDatatable.NewDatatable();
+table.SetSize( 5, 5 );
+// table.RowCount() === 5
+// table.ColumnCount() === 5
+```
+
+
 ---------------------------------------------------------------------
 
 
 ## NewBlankDatatable( RowCount, ColumnCount )
 
 Creates an empty `Datatable` with the requested rows and columns.
+
+
+### Examples
+
+```javascript
+// Get a blank 5x5 table.
+const LibDatatable = require( '@liquicode/lib-datatable' );
+let table = LibDatatable.NewBlankDatatable( 5, 5 );
+// table.RowCount() === 5
+// table.ColumnCount() === 5
+```
 
 
 ---------------------------------------------------------------------
@@ -27,4 +50,25 @@ Creates an empty `Datatable` with the requested rows and columns.
 
 Creates a `Datatable` and populates with values from the given Matrix.
 The `Datatable` will have the same number of rows and columns as the Matrix.
+
+
+### Examples
+
+```javascript
+// A test matrix:
+let matrix =
+[
+	[ 1,  2,  3,  4,  5 ],
+	[ 2,  4,  6,  8, 10 ],
+	[ 3,  6,  9, 12, 15 ],
+	[ 4,  8, 12, 16, 20 ],
+	[ 5, 10, 15, 20, 25 ],
+]
+// Get a test 5x5 table.
+const LibDatatable = require( '@liquicode/lib-datatable' );
+let table = LibDatatable.FromMatrix( matrix );
+// table.RowCount() === 5
+// table.ColumnCount() === 5
+// table.GetValue( 'C3' ) === 9
+```
 

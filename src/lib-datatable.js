@@ -50,6 +50,7 @@ function NewDatatable()
 			col_base: 0,
 			rows: [],
 			column_headings: [],
+			column_infos: [],
 		},
 
 
