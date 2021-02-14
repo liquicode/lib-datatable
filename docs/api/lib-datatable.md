@@ -72,3 +72,33 @@ let table = LibDatatable.FromMatrix( matrix );
 // table.GetValue( 'C3' ) === 9
 ```
 
+
+---------------------------------------------------------------------
+
+
+## FromObjects( Objects )
+
+Creates a `Datatable` and populates with values from the given array of objects.
+The field names found in `Objects` will be used as column headings.
+The `Datatable` will have the same number of rows as array of objects.
+
+
+### Examples
+
+```javascript
+// A test array:
+let objects =
+[
+	{ name: 'Alice', age: 23 },
+	{ name: 'Bob', age: 25 },
+	{ name: 'Eve', age: 24 },
+]
+// Get a test 5x5 table.
+const LibDatatable = require( '@liquicode/lib-datatable' );
+let table = LibDatatable.FromObjects( objects );
+// table.RowCount() === 3
+// table.ColumnCount() === 2
+// table.ColumnHeading( 'A" ) === 'name'
+// table.ColumnHeading( 'B" ) === 'age'
+```
+

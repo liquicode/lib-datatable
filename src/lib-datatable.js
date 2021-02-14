@@ -116,6 +116,7 @@ function NewDatatable()
 		ClearColumns: LIB_DATATABLE_COLUMNS.ClearColumns,
 		InsertBlankColumns: LIB_DATATABLE_COLUMNS.InsertBlankColumns,
 		ColumnHeading: LIB_DATATABLE_COLUMNS.ColumnHeading,
+		ColumnInfo: LIB_DATATABLE_COLUMNS.ColumnInfo,
 
 
 		//=====================================================================
@@ -175,6 +176,25 @@ exports.FromMatrix =
 	{
 		let table = NewDatatable();
 		table.SetMatrix( Matrix, 0, 0 );
+		return table;
+	};
+
+
+//=====================================================================
+//=====================================================================
+//
+//		FROM OBJECTS
+//
+//=====================================================================
+//=====================================================================
+
+
+//---------------------------------------------------------------------
+exports.FromObjects =
+	function FromObjects( Objects )
+	{
+		let table = NewDatatable();
+		table.FromObjects( Objects );
 		return table;
 	};
 

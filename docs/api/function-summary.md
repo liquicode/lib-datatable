@@ -13,6 +13,9 @@
 - [FromMatrix( Matrix )](api/lib-datatable?id=frommatrix-matrix-) :
 	Creates a new `Datatable` from an array of arrays.
 
+- [FromObjects( Objects )](api/lib-datatable?id=fromobjects-objects-) :
+	Creates a new `Datatable` from an array of objects.
+
 
 ## Table Functions
 
