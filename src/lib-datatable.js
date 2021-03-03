@@ -1,8 +1,9 @@
 "use strict";
 
 
-const LIB_UTILS = require( './lib-utils.js' );
+// const LIB_UTILS = require( './lib-utils.js' );
 const LIB_DATATABLE_TABLE = require( './datatable-table.js' );
+const LIB_DATATABLE_SHAPING = require( './datatable-shaping.js' );
 const LIB_DATATABLE_CELLS = require( './datatable-cells.js' );
 const LIB_DATATABLE_COLUMNS = require( './datatable-columns.js' );
 const LIB_DATATABLE_ROWS = require( './datatable-rows.js' );
@@ -85,7 +86,16 @@ function NewDatatable()
 		ToObjects: LIB_DATATABLE_TABLE.ToObjects,
 		FromObjects: LIB_DATATABLE_TABLE.FromObjects,
 
-		TransposeTable: LIB_DATATABLE_TABLE.TransposeTable,
+
+		//=====================================================================
+		//=====================================================================
+		//
+		//		SHAPING FUNCTIONS
+		//
+		//=====================================================================
+		//=====================================================================
+
+		TransposeTable: LIB_DATATABLE_SHAPING.TransposeTable,
 		// UnionTable: LIB_DATATABLE_TABLE.UnionTable,
 		// IntersectTable: LIB_DATATABLE_TABLE.IntersectTable,
 		// SortTable: LIB_DATATABLE_TABLE.SortTable,
@@ -209,24 +219,27 @@ exports.FromObjects =
 //=====================================================================
 
 
-/*
 if ( typeof define === 'function' && define.amd )
 {
 	// AMD Loader
 	define( function ()
 	{
 		'use strict';
-		return showdown;
+		return exports;
 	} );
 
 } else if ( typeof module !== 'undefined' && module.exports )
 {
 	// CommonJS/nodeJS Loader
-	module.exports = showdown;
+	module.exports = exports;
+
+} else if ( typeof window !== 'undefined' )
+{
+	// CommonJS/nodeJS Loader
+	window.LibDatatable = exports;
 
 } else
 {
 	// Regular Browser loader
-	root.showdown = showdown;
+	root.LibDatatable = exports;
 }
-*/
