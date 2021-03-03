@@ -345,9 +345,12 @@ exports.TransposeTable =
 
 
 // //---------------------------------------------------------------------
-// exports.UnionTable =
-// 	function UnionTable( OtherTable, SourceKeyColumn, OtherKeyColumn )
+// exports.JoinTable =
+// 	function JoinTable( OtherTable, SourceKeyColumn, OtherKeyColumn, JoinBehavior )
 // 	{
+// 		JoinContext = left | right | both
+// 		JoinFunction = inner | outer | both
+//
 // 		throw new Error( 'Not Implemented' );
 // 	};
 
@@ -369,8 +372,8 @@ exports.TransposeTable =
 
 
 // //---------------------------------------------------------------------
-// exports.FilterTable =
-// 	function FilterTable( FilterFunction )
+// exports.ScanTable =
+// 	function ScanTable( ScanFunction )
 // 	{
 // 		throw new Error( 'Not Implemented' );
 // 	};
