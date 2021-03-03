@@ -2,7 +2,7 @@
 
 ![logo](media/lib-datatable-banner-300x60.png)
 
-# lib-datatable <small>(v0.0.9)</small>
+# lib-datatable <small>(v0.0.10)</small>
 
 <hr>
 
