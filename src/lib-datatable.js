@@ -78,6 +78,7 @@ function NewDatatable()
 		ColumnCount: LIB_DATATABLE_TABLE.ColumnCount,
 		SetSize: LIB_DATATABLE_TABLE.SetSize,
 
+		ToMatrix: LIB_DATATABLE_TABLE.ToMatrix,
 		GetMatrix: LIB_DATATABLE_TABLE.GetMatrix,
 		SetMatrix: LIB_DATATABLE_TABLE.SetMatrix,
 

@@ -125,6 +125,46 @@ let y = table.ColumnCount();  /* y = 5 */
 ---------------------------------------------------------------------
 
 
+## ToMatrix()
+
+Gets a matrix (array of array of values) of all the values in the datatable.
+
+
+### ToMatrix Invocation
+
+This function has no parameters and there is only one way to call it.
+
+- `ToMatrix()`
+
+
+### ToMatrix Return Value
+
+This function returns an array of array of values.
+
+
+### ToMatrix Usage
+
+```javascript
+// Create a 3x3 test table.
+const LibDatatable = require( '@liquicode/lib-datatable' );
+let table = LibDatatable.FromMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ] ] );
+
+// Get a subset of the cells.
+let matrix = table.ToMatrix();
+// matrix = 
+// 	[
+// 		[ 1, 2, 3 ],
+// 		[ 4, 5, 6 ],
+// 		[ 7, 8, 9 ],
+// 	]
+```
+
+
+
+
+---------------------------------------------------------------------
+
+
 ## GetMatrix( FromRowIndex, FromColumnIndex, ToRowIndex, ToColumnIndex )
 
 Gets a matrix (array of array of values) specified by the given indexes.

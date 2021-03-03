@@ -25,17 +25,17 @@ const LIB_UTILS = require( './lib-utils.js' );
 //---------------------------------------------------------------------
 /**
  * Used to get and set the number of rows in a `Datatable`.
- * @param {integer} Count When supplied, changes the number of rows.
+ * @param {integer} Count (optional) When supplied, changes the number of rows.
  * @returns The number of rows in the `Datatable`
  */
 exports.RowCount =
 	function RowCount( Count )
 	{
-		if ( Count < 0 ) { throw new Error( `Count must be zero or positive.` ); }
-
 		// If Count is supplied, then adjust the row count.
 		if ( !LIB_UTILS.value_missing( Count ) )
 		{
+			if ( Count < 0 ) { throw new Error( `Count must be zero or positive.` ); }
+
 			// Add rows.
 			while ( Count > this.data.rows.length )
 			{
@@ -62,17 +62,17 @@ exports.RowCount =
 //---------------------------------------------------------------------
 /**
  * Used to get and set the number of columns in a `Datatable`.
- * @param {integer} Count When supplied, changes the number of columns.
+ * @param {integer} Count (optional) When supplied, changes the number of columns.
  * @returns The number of columns in the `Datatable`
  */
 exports.ColumnCount =
 	function ColumnCount( Count )
 	{
-		if ( Count < 0 ) { throw new Error( `Count must be zero or positive.` ); }
-
 		// If Count is supplied, then adjust the column count.
 		if ( !LIB_UTILS.value_missing( Count ) )
 		{
+			if ( Count < 0 ) { throw new Error( `Count must be zero or positive.` ); }
+
 			// Add column headers.
 			while ( Count > this.data.column_headings.length )
 			{
@@ -124,6 +124,25 @@ exports.SetSize =
 //=====================================================================
 //=====================================================================
 //
+//		TO MATRIX
+//
+//=====================================================================
+//=====================================================================
+
+
+//---------------------------------------------------------------------
+exports.ToMatrix =
+	function ToMatrix()
+	{
+		let row_count = this.RowCount();
+		let column_count = this.ColumnCount();
+		return this.GetMatrix( 0, 0, row_count - 1, column_count - 1 );
+	};
+
+
+//=====================================================================
+//=====================================================================
+//
 //		GET MATRIX
 //
 //=====================================================================
@@ -134,6 +153,12 @@ exports.SetSize =
 exports.GetMatrix =
 	function GetMatrix( FromRowIndex, FromColumnIndex, ToRowIndex, ToColumnIndex )
 	{
+		// Validate the prameters.
+		if ( LIB_UTILS.value_missing( FromRowIndex ) ) { throw new Error( `FromRowIndex is required.` ); }
+		if ( LIB_UTILS.value_missing( FromColumnIndex ) ) { throw new Error( `FromColumnIndex is required.` ); }
+		if ( LIB_UTILS.value_missing( ToRowIndex ) ) { throw new Error( `ToRowIndex is required.` ); }
+		if ( LIB_UTILS.value_missing( ToColumnIndex ) ) { throw new Error( `ToColumnIndex is required.` ); }
+
 		// Copy values.
 		let sub_rows = [];
 		for ( let row_index = FromRowIndex; row_index <= ToRowIndex; row_index++ )
@@ -211,6 +236,10 @@ exports.SetMatrix =
 exports.FromObjects =
 	function FromObjects( Objects )
 	{
+		// Validate the prameters.
+		if ( LIB_UTILS.value_missing( Objects ) ) { throw new Error( `Objects is required.` ); }
+		if ( !Array.isArray( Objects ) ) { throw new Error( `Objects must be an array of objects.` ); }
+
 		this.SetSize( Objects.length, 0 );
 		for ( let row_index = 0; row_index < Objects.length; row_index++ )
 		{

@@ -28,6 +28,9 @@
 - [SetSize( RowCount, ColumnCount )](api/datatable-table?id=setsize-rowcount-columncount-) :
 	Used to set the number of rows and/or columns in a `Datatable`.
 
+- [ToMatrix()](api/datatable-table?id=tomatrix) :
+	Get a matrix (array of arrays) of all the values in the `Datatable`.
+
 - [GetMatrix( FromRowIndex, FromColumnIndex, ToRowIndex, ToColumnIndex )](api/datatable-table?id=getmatrix-fromrowindex-fromcolumnindex-torowindex-tocolumnindex-) :
 	Get a matrix (array of arrays) of a portion of the `Datatable`.
 
