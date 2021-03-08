@@ -278,17 +278,17 @@ exports.ToObjects =
 		let objects = [];
 		for ( let row_index = 0; row_index < this.data.rows.length; row_index++ )
 		{
-			let obj = {};
-			for ( let col_index = 0; col_index < this.data.column_headings.length; col_index++ )
-			{
-				let heading = this.data.column_headings[ col_index ];
-				if ( !heading || !heading.length ) { heading = `column${col_index}`; }
-				obj[ heading ] = this.GetValue( row_index, col_index );
-			}
-			objects.push( obj );
+			// let obj = {};
+			// for ( let col_index = 0; col_index < this.data.column_headings.length; col_index++ )
+			// {
+			// 	let heading = this.data.column_headings[ col_index ];
+			// 	if ( !heading || !heading.length ) { heading = `column${col_index}`; }
+			// 	obj[ heading ] = this.GetValue( row_index, col_index );
+			// }
+			// objects.push( obj );
+			objects.push( this.ToObject( row_index ) );
 		}
 		return objects;
 	};
 
 
-	

@@ -7,6 +7,48 @@ A `Datatable` exposes several functions to inspect and manipulate the rows of a 
 ---------------------------------------------------------------------
 
 
+## ToObject( AtRow )
+
+Converts a row to an object.
+
+
+### ToObject Invocation
+
+- `ToObject( RowIndex )`
+	- `RowIndex` is a numerical zero based row index (e.g. `3`),
+		or a negative offset from the end of the table.
+- `ToObject( Address )`
+	- `Address` is a spreadsheet style row address (e.g. `'C'`)
+- `ToObject( RowCol )`
+	- `RowCol` is a `RowCol` object with one of the row fields supplied
+		(e.g. `{row_num: 4}`).
+
+
+### ToObject Return Value
+
+An object with fields from datatable columns and values from a datatable row.
+
+
+### ToObject Usage
+
+```javascript
+// Get a blank table.
+const LibDatatable = require( '@liquicode/lib-datatable' );
+let table = LibDatatable.FromObjects( [ { hello: 'world' }, { hello: 'goodbye' } ] );
+
+// Get the first row as an object.
+let row = table.ToObject( 0 );
+// row.hello === 'world'
+
+// Get another row as an object.
+let row = table.ToObject( 1 );
+// row.hello === 'goodbye'
+```
+
+
+---------------------------------------------------------------------
+
+
 ## DeleteRows( Count, AtRow )
 
 Deletes a number of rows starting at a specific row index.

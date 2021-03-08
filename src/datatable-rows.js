@@ -16,6 +16,47 @@ const LIB_UTILS = require( './lib-utils.js' );
 //=====================================================================
 //=====================================================================
 //
+//		TO OBJECT
+//
+//=====================================================================
+//=====================================================================
+
+
+//---------------------------------------------------------------------
+/**
+ * Converts a row to an object.
+ * @param {any} AtRow Must be one of: A zero based row index, a string address, or a RowCol object.
+ */
+exports.ToObject =
+	function ToObject( AtRow )
+	{
+		// Validate arguments.
+		if ( LIB_UTILS.value_missing( AtRow ) ) { throw new Error( `AtRow is required.` ); }
+
+		// Convert index to a RowCol
+		if ( typeof AtRow === 'number' )
+		{ AtRow = { row_index: AtRow }; }
+		else if ( typeof AtRow === 'string' )
+		{ AtRow = { row_addr: AtRow }; }
+		let rowcol = this.RowCol( AtRow );
+
+		// Get Object.
+		let obj = {};
+		for ( let col_index = 0; col_index < this.data.column_headings.length; col_index++ )
+		{
+			let heading = this.data.column_headings[ col_index ];
+			if ( !heading || !heading.length ) { heading = `column${col_index}`; }
+			obj[ heading ] = this.GetValue( rowcol.row_index, col_index );
+		}
+
+		// Return, OK.
+		return obj;
+	};
+
+
+//=====================================================================
+//=====================================================================
+//
 //		DELETE ROWS
 //
 //=====================================================================

@@ -138,6 +138,7 @@ function NewDatatable()
 		//=====================================================================
 		//=====================================================================
 
+		ToObject: LIB_DATATABLE_ROWS.ToObject,
 		DeleteRows: LIB_DATATABLE_ROWS.DeleteRows,
 		ClearRows: LIB_DATATABLE_ROWS.ClearRows,
 		InsertBlankRows: LIB_DATATABLE_ROWS.InsertBlankRows,
