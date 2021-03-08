@@ -155,7 +155,7 @@
       ✓ should transpose a table
 
 
-  119 passing (92ms)
+  119 passing (93ms)
 
 
 ```
