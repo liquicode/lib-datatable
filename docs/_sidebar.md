@@ -12,12 +12,17 @@
 
 - Library API
 
-	- [Function Summary](api/function-summary.md)
+	- [Library Functions](api/library-function-summary.md)
+
+- Datatable API
+
+	- [Datatable Functions](api/datatable-function-summary.md)
 	- [Constructors](api/lib-datatable.md)
-	- [Table Functions](api/datatable-table.md)
 	- [Cell Functions](api/datatable-cells.md)
-	- [Column Functions](api/datatable-columns.md)
 	- [Row Functions](api/datatable-rows.md)
+	- [Column Functions](api/datatable-columns.md)
+	- [Table Functions](api/datatable-table.md)
+	- [Shaping Functions](api/datatable-shaping.md)
 
 <hr>
 

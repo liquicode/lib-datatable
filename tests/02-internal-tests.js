@@ -1,7 +1,7 @@
 "use strict";
 
 
-const LIB_DATATABLE = require( '../src/lib-datatable.js' );
+const LibDatatable = require( '../src/lib-datatable.js' );
 const LIB_UTILS = require( '../src/lib-utils.js' );
 const LIB_ASSERT = require( 'assert' );
 
@@ -17,7 +17,7 @@ describe( `02) Internal Tests`,
 		it( `creates a new datatable`,
 			async function ()
 			{
-				let table = LIB_DATATABLE.NewDatatable();
+				let table = LibDatatable.NewDatatable();
 				LIB_ASSERT.ok( table );
 				LIB_ASSERT.strictEqual( table.data.rows.length, 0 );
 				LIB_ASSERT.strictEqual( table.data.column_headings.length, 0 );
@@ -28,7 +28,7 @@ describe( `02) Internal Tests`,
 		it( `creates a datatable from a matrix`,
 			async function ()
 			{
-				let table = LIB_DATATABLE.FromMatrix( LIB_TEST.ProductMatrix );
+				let table = LibDatatable.NewDatatableFromMatrix( LIB_TEST.ProductMatrix );
 				LIB_ASSERT.ok( table );
 				LIB_ASSERT.strictEqual( table.data.rows.length, LIB_TEST.MatrixSize );
 				LIB_ASSERT.strictEqual( table.data.column_headings.length, LIB_TEST.MatrixSize );

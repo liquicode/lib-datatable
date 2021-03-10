@@ -88,8 +88,24 @@ function number2address( Number )
 
 
 //---------------------------------------------------------------------
+/**
+ * Tests if an array is composed of unique values.
+ * @param {array} array An array of values.
+ */
+function is_unique( array )
+{
+	for ( let index = 0; index < array.length; index++ )
+	{
+		if ( array.indexOf( array[ index ], index + 1 ) >= 0 ) { return false; }
+	}
+	return true;
+}
+
+
+//---------------------------------------------------------------------
 exports.value_missing = value_missing;
 exports.clone = clone;
 exports.resolve_index = resolve_index;
 exports.address2number = address2number;
 exports.number2address = number2address;
+exports.is_unique = is_unique;

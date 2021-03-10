@@ -55,6 +55,10 @@ function NewDatatable()
 		},
 
 
+		//---------------------------------------------------------------------
+		IsDatatable: true,
+
+
 		//=====================================================================
 		//=====================================================================
 		//
@@ -65,6 +69,20 @@ function NewDatatable()
 
 		// RowBase: LIB_DATATABLE_ADDRESSING.RowBase,
 		// ColBase: LIB_DATATABLE_ADDRESSING.ColBase,
+
+
+		//=====================================================================
+		//=====================================================================
+		//
+		//		CONSTRUCTOR FUNCTIONS
+		//
+		//=====================================================================
+		//=====================================================================
+
+		NewDatatable: NewDatatable,
+		NewBlankDatatable: NewBlankDatatable,
+		NewDatatableFromMatrix: NewDatatableFromMatrix,
+		NewDatatableFromObjects: NewDatatableFromObjects,
 
 
 		//=====================================================================
@@ -86,6 +104,8 @@ function NewDatatable()
 		ToObjects: LIB_DATATABLE_TABLE.ToObjects,
 		FromObjects: LIB_DATATABLE_TABLE.FromObjects,
 
+		Clone: LIB_DATATABLE_TABLE.Clone,
+
 
 		//=====================================================================
 		//=====================================================================
@@ -96,6 +116,8 @@ function NewDatatable()
 		//=====================================================================
 
 		TransposeTable: LIB_DATATABLE_SHAPING.TransposeTable,
+		AppendTable: LIB_DATATABLE_SHAPING.AppendTable,
+		JoinTable: LIB_DATATABLE_SHAPING.JoinTable,
 		// UnionTable: LIB_DATATABLE_TABLE.UnionTable,
 		// IntersectTable: LIB_DATATABLE_TABLE.IntersectTable,
 		// SortTable: LIB_DATATABLE_TABLE.SortTable,
@@ -127,6 +149,7 @@ function NewDatatable()
 		ClearColumns: LIB_DATATABLE_COLUMNS.ClearColumns,
 		InsertBlankColumns: LIB_DATATABLE_COLUMNS.InsertBlankColumns,
 		ColumnHeading: LIB_DATATABLE_COLUMNS.ColumnHeading,
+		ColumnHeadings: LIB_DATATABLE_COLUMNS.ColumnHeadings,
 		ColumnInfo: LIB_DATATABLE_COLUMNS.ColumnInfo,
 
 
@@ -151,7 +174,6 @@ function NewDatatable()
 	// Return the DataTable Object.
 	return datatable;
 };
-exports.NewDatatable = NewDatatable;
 
 
 //=====================================================================
@@ -164,13 +186,12 @@ exports.NewDatatable = NewDatatable;
 
 
 //---------------------------------------------------------------------
-exports.NewBlankDatatable =
-	function NewBlankDatatable( RowCount, ColumnCount )
-	{
-		let table = NewDatatable();
-		table.SetValue( table.blank_value, RowCount - 1, ColumnCount - 1 );
-		return table;
-	};
+function NewBlankDatatable( RowCount, ColumnCount )
+{
+	let table = NewDatatable();
+	table.SetValue( table.blank_value, RowCount - 1, ColumnCount - 1 );
+	return table;
+};
 
 
 //=====================================================================
@@ -183,13 +204,12 @@ exports.NewBlankDatatable =
 
 
 //---------------------------------------------------------------------
-exports.FromMatrix =
-	function FromMatrix( Matrix )
-	{
-		let table = NewDatatable();
-		table.SetMatrix( Matrix, 0, 0 );
-		return table;
-	};
+function NewDatatableFromMatrix( Matrix )
+{
+	let table = NewDatatable();
+	table.SetMatrix( Matrix, 0, 0 );
+	return table;
+};
 
 
 //=====================================================================
@@ -202,13 +222,12 @@ exports.FromMatrix =
 
 
 //---------------------------------------------------------------------
-exports.FromObjects =
-	function FromObjects( Objects )
-	{
-		let table = NewDatatable();
-		table.FromObjects( Objects );
-		return table;
-	};
+function NewDatatableFromObjects( Objects )
+{
+	let table = NewDatatable();
+	table.FromObjects( Objects );
+	return table;
+};
 
 
 //=====================================================================
@@ -218,6 +237,15 @@ exports.FromObjects =
 //
 //=====================================================================
 //=====================================================================
+
+exports.NewDatatable = NewDatatable;
+exports.NewBlankDatatable = NewBlankDatatable;
+exports.NewDatatableFromMatrix = NewDatatableFromMatrix;
+exports.NewDatatableFromObjects = NewDatatableFromObjects;
+
+// For backward compatibility.
+exports.FromMatrix = NewDatatableFromMatrix;
+exports.FromObjects = NewDatatableFromObjects;
 
 
 if ( typeof define === 'function' && define.amd )

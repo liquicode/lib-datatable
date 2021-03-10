@@ -46,7 +46,7 @@ let table = LibDatatable.NewBlankDatatable( 5, 5 );
 ---------------------------------------------------------------------
 
 
-## FromMatrix( Matrix )
+## NewDatatableFromMatrix( Matrix )
 
 Creates a `Datatable` and populates with values from the given Matrix.
 The `Datatable` will have the same number of rows and columns as the Matrix.
@@ -66,7 +66,7 @@ let matrix =
 ]
 // Get a test 5x5 table.
 const LibDatatable = require( '@liquicode/lib-datatable' );
-let table = LibDatatable.FromMatrix( matrix );
+let table = LibDatatable.NewDatatableFromMatrix( matrix );
 // table.RowCount() === 5
 // table.ColumnCount() === 5
 // table.GetValue( 'C3' ) === 9
@@ -76,7 +76,7 @@ let table = LibDatatable.FromMatrix( matrix );
 ---------------------------------------------------------------------
 
 
-## FromObjects( Objects )
+## NewDatatableFromObjects( Objects )
 
 Creates a `Datatable` and populates with values from the given array of objects.
 The field names found in `Objects` will be used as column headings.
@@ -95,7 +95,7 @@ let objects =
 ]
 // Get a test 5x5 table.
 const LibDatatable = require( '@liquicode/lib-datatable' );
-let table = LibDatatable.FromObjects( objects );
+let table = LibDatatable.NewDatatableFromObjects( objects );
 // table.RowCount() === 3
 // table.ColumnCount() === 2
 // table.ColumnHeading( 'A" ) === 'name'

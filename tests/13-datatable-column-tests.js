@@ -1,7 +1,7 @@
 "use strict";
 
 
-const LIB_DATATABLE = require( '../src/lib-datatable.js' );
+const LibDatatable = require( '../src/lib-datatable.js' );
 const LIB_TEST = require( './test-data/test-matrices.js' );
 const LIB_ASSERT = require( 'assert' );
 
@@ -19,7 +19,7 @@ describe( `13) Datatable Columns Tests`,
 		beforeEach(
 			function ()
 			{
-				Datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.CountMatrix );
+				Datatable = LibDatatable.NewDatatableFromMatrix( LIB_TEST.CountMatrix );
 				LIB_ASSERT.ok( Datatable, `Datatable failed to create.` );
 				return;
 			} );

@@ -230,6 +230,40 @@ heading = table.ColumnHeading( 'E' );
 ---------------------------------------------------------------------
 
 
+## ColumnHeadings( Headings )
+
+Sets or gets all of the column headings.
+
+
+### ColumnHeading Invocation
+
+- `ColumnHeadings()`:
+- `ColumnHeadings( Headings )`:
+	- `Headings` an array of strings containing the new column headings.
+
+Omit the `Headings` parameter or pass `null` to get the column headings.
+
+
+### ColumnHeadings Return Value
+
+This function always returns the array of column headings for this datatable.
+
+
+### ColumnHeadings Usage
+
+```javascript
+// Get a blank 5x5 table.
+const LibDatatable = require( '@liquicode/lib-datatable' );
+let table = LibDatatable.NewDatatable();
+table.ColumnHeadings( [ 'A', 'B', 'C' ] );
+let headings = table.ColumnHeadings();
+// headings = [ 'A', 'B', 'C' ]
+```
+
+
+---------------------------------------------------------------------
+
+
 ## ColumnInfo( AtColumn, Info )
 
 Sets or gets the heading for a specific column.

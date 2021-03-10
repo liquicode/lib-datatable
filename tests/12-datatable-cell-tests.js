@@ -1,7 +1,7 @@
 "use strict";
 
 
-const LIB_DATATABLE = require( '../src/lib-datatable.js' );
+const LibDatatable = require( '../src/lib-datatable.js' );
 const LIB_TEST = require( './test-data/test-matrices.js' );
 const LIB_ASSERT = require( 'assert' );
 
@@ -23,7 +23,7 @@ describe( `12) Datatable Cells Tests`,
 		beforeEach(
 			function ()
 			{
-				Datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.ProductMatrix );
+				Datatable = LibDatatable.NewDatatableFromMatrix( LIB_TEST.ProductMatrix );
 				LIB_ASSERT.ok( Datatable, `Datatable failed to create.` );
 				return;
 			} );
@@ -51,7 +51,7 @@ describe( `12) Datatable Cells Tests`,
 				beforeEach(
 					function ()
 					{
-						Datatable = LIB_DATATABLE.FromMatrix( LIB_TEST.ProductMatrix );
+						Datatable = LibDatatable.NewDatatableFromMatrix( LIB_TEST.ProductMatrix );
 						LIB_ASSERT.ok( Datatable, `Datatable failed to create.` );
 						LIB_ASSERT.ok( Datatable.GetValue( 0, 0 ) === 0, `Mismatched value at (0, 0) in ProductMatrix.` );
 						return;

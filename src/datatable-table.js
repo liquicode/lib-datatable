@@ -132,11 +132,71 @@ exports.SetSize =
 
 //---------------------------------------------------------------------
 exports.ToMatrix =
-	function ToMatrix()
+	function ToMatrix( ColumnIndexesOrHeadings )
 	{
+		let matrix = [];
+		let column_mapping = [];
 		let row_count = this.RowCount();
 		let column_count = this.ColumnCount();
-		return this.GetMatrix( 0, 0, row_count - 1, column_count - 1 );
+
+		// Map the columns.
+		if ( !ColumnIndexesOrHeadings )
+		{
+			// matrix = this.GetMatrix( 0, 0, row_count - 1, column_count - 1 );
+			this.data.column_headings.forEach(
+				( column_heading, column_index ) =>
+				{
+					column_mapping.push( column_index );
+				} );
+		}
+		else
+		{
+			ColumnIndexesOrHeadings.forEach(
+				column =>
+				{
+					let source_column_index = null;
+					if ( ( column === null ) || ( column === -1 ) )
+					{
+						source_column_index = null;
+					}
+					else if ( typeof column === 'number' )
+					{
+						source_column_index = parseInt( column );
+						if ( source_column_index < 0 ) { throw new Error( `This is an invalid column index [${source_column_index}].` ); }
+						if ( source_column_index >= column_count ) { throw new Error( `This is an invalid column index [${source_column_index}].` ); }
+					}
+					else
+					{
+						source_column_index = this.data.column_headings.findIndex( column_heading => column === column_heading );
+						if ( source_column_index < 0 ) { throw new Error( `This column does not exist [${column}].` ); }
+					}
+					column_mapping.push( source_column_index );
+				} );
+		}
+
+		// Create the matrix.
+		for ( let row_index = 0; row_index < row_count; row_index++ )
+		{
+			let row = [];
+			// column_mapping.forEach( source_column_index => row.push( this.data.rows[ row_index ][ source_column_index ] ) );
+			for ( let column_index = 0; column_index < column_mapping.length; column_index++ )
+			{
+				let source_column_index = column_mapping[ column_index ];
+				if ( source_column_index === null )
+				{
+					row.push( null );
+				}
+				else
+				{
+					// row.push( this.data.rows[ row_index ][ source_column_index ] );
+					row.push( this.GetValue( row_index, source_column_index ) );
+				}
+			}
+			matrix.push( row );
+		}
+
+		// Return the matrix.
+		return matrix;
 	};
 
 
@@ -196,7 +256,7 @@ exports.SetMatrix =
 		if ( rowcol.col_index === null ) { throw new Error( `Invalid ColIndex [${rowcol.col_index}].` ); }
 
 		// Grow the table if needed.
-		let end_row_number = ToRow + Matrix.length;
+		let end_row_number = rowcol.row_index + Matrix.length;
 		if ( end_row_number > this.RowCount() )
 		{
 			this.RowCount( end_row_number );
@@ -209,12 +269,12 @@ exports.SetMatrix =
 			for ( let col_index = 0; col_index < from_row.length; col_index++ )
 			{
 				let value = from_row[ col_index ];
-				let end_col_number = ToColumn + from_row.length;
+				let end_col_number = rowcol.col_index + from_row.length;
 				if ( end_col_number > this.ColumnCount() )
 				{
 					this.ColumnCount( end_col_number );
 				}
-				this.SetValue( value, ToRow + row_index, ToColumn + col_index );
+				this.SetValue( value, rowcol.row_index + row_index, rowcol.col_index + col_index );
 			}
 		}
 
@@ -289,6 +349,25 @@ exports.ToObjects =
 			objects.push( this.ToObject( row_index ) );
 		}
 		return objects;
+	};
+
+
+//=====================================================================
+//=====================================================================
+//
+//		CLONE
+//
+//=====================================================================
+//=====================================================================
+
+
+//---------------------------------------------------------------------
+exports.Clone =
+	function Clone()
+	{
+		let objects = this.ToObjects();
+		let table = this.NewDatatableFromObjects( objects );
+		return table;
 	};
 
 

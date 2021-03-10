@@ -157,7 +157,7 @@ exports.InsertBlankRows =
 		if ( LIB_UTILS.value_missing( Count ) ) { throw new Error( `Count is required.` ); }
 		if ( LIB_UTILS.value_missing( AtRow ) ) { throw new Error( `AtRow is required.` ); }
 		if ( Count < 1 ) { throw new Error( 'Count must be greater than or equal to one.' ); }
-		if ( Count > this.RowCount() ) { throw new Error( 'Count must be less than or equal to the number of rows.' ); }
+		// if ( Count > this.RowCount() ) { throw new Error( 'Count must be less than or equal to the number of rows.' ); }
 
 		// Convert index to a RowCol
 		let insert_after = false;
@@ -169,7 +169,7 @@ exports.InsertBlankRows =
 		else if ( typeof AtRow === 'string' )
 		{ AtRow = { row_addr: AtRow }; }
 		let rowcol = this.RowCol( AtRow );
-		if ( rowcol.row_index >= this.RowCount() ) { throw new Error( 'Starting index must be less than the number of rows.' ); }
+		if ( rowcol.row_index > this.RowCount() ) { throw new Error( 'Starting index must be less than or equal to the number of rows.' ); }
 
 		// // Add blank rows to reach AtRow.
 		// while ( AtRow.row_index > this.data.rows.length )

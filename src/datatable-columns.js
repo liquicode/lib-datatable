@@ -220,6 +220,43 @@ exports.ColumnHeading =
 //=====================================================================
 //=====================================================================
 //
+//		COLUMN HEADINGS
+//
+//=====================================================================
+//=====================================================================
+
+
+//---------------------------------------------------------------------
+/**
+ * Sets or gets the all column headings.
+ * @param {array} Heading Array of column headings.
+ * 		Omit this parameter or pass `null` to get the column headings.
+ * @return {array} Array of column headings.
+ */
+exports.ColumnHeadings =
+	function ColumnHeadings( Headings = null )
+	{
+		if ( !LIB_UTILS.value_missing( Headings ) )
+		{
+			if ( !Array.isArray( Headings ) ) { throw new Error( `The parameter [Headings] must be an array.` ); }
+			if ( Headings.length > this.ColumnCount() )
+			{
+				this.InsertBlankColumns( ( Headings.length - this.ColumnCount() ), this.ColumnCount() );
+			}
+			for ( let index = 0; index < Headings.length; index++ )
+			{
+				this.data.column_headings[ index ] = Headings[ index ];
+			}
+		}
+
+		// Return the column heading.
+		return LIB_UTILS.clone( this.data.column_headings );
+	};
+
+
+//=====================================================================
+//=====================================================================
+//
 //		COLUMN INFO
 //
 //=====================================================================
