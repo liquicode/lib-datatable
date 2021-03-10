@@ -151,11 +151,31 @@
     To/From Objects
       ✓ should create a table and column headings from an array of objects
       ✓ should re-create an array of objects
-    Shaping Functions
+    To/From Matrix
+      ✓ should create a matrix
+      ✓ should create a matrix of indexed columns
+      ✓ should create a matrix of named columns
+      ✓ should create a matrix of mixed columns
+      ✓ should create a matrix with null columns
+      ✓ should create a matrix with '-1' columns
+
+  16) Datatable Shaping Tests
+    TransposeTable Function
       ✓ should transpose a table
+    AppendTable Function
+      ✓ should append single column tables
+      ✓ should append multi column tables
+      ✓ should append mapped columns
+      ✓ should add missing columns
+    JoinTable Function
+      ✓ should inner join tables
+      ✓ should left join tables
+      ✓ should right join tables
+      ✓ should full join tables
+      ✓ should join tables with columns projection
 
 
-  119 passing (93ms)
+  134 passing (102ms)
 
 
 ```
