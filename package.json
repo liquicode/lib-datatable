@@ -1,6 +1,6 @@
 {
 	"name": "@liquicode/lib-datatable",
-	"version": "0.0.11",
+	"version": "0.0.12",
 	"description": "A NodeJS library to manipulate an in memory table (array of arrays).",
 	"homepage": "http://lib-datatable.liquicode.com",
 	"license": "MIT",
