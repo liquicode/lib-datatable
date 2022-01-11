@@ -1,5 +1,5 @@
 
-# lib-datatable (v0.0.13)
+# lib-datatable (v0.1.00)
 
 A NodeJS library to manipulate an in memory table (array of arrays).
 
@@ -32,11 +32,30 @@ for serialization and transmission of large data.
 
 ## Getting Started
 
+***NodeJS***
 Install via NPM:
 ```bash
 npm install @liquicode/lib-datatable
 ```
 
+Use the imported `LibDatatable` object:
+```javascript
+const LibDatatable = require( '@liquicode/lib-datatable' );
+let table = LibDatatable.NewDatable();
+table.SetSize( 100, 5 );
+```
+
+***NodeJS***
+Include via url:
+```html
+<script type="text/javascript" src="{url}/lib-datatable.min.js"></script>
+```
+
+Use the globally defined `LibDatatable` object:
+```javascript
+let table = LibDatatable.NewDatable();
+table.SetSize( 100, 5 );
+```
 
 ---------------------------------------------------------------------
 
