@@ -27,9 +27,9 @@ const LIB_UTILS = require( './lib-utils.js' );
  * Constructs a RowCol object from two numerical indexes,
  * a string (spreadsheet like) address,
  * or another RowCol object.
- * @param {any} AtRow Must be one of: A zero based row index, a string address, or a RowCol object.
+ * @param {any} AtRow Must be one of: A zero based row index, a string address, or another RowCol object.
  * @param {integer} AtColumn If RowIndex is specified as a numeric index, then this parameter is also
- * 		required and must also be a column index.
+ * 		required and must also be a numerical column index.
  * @returns A RowCol object.
  */
 exports.RowCol =
@@ -48,6 +48,10 @@ exports.RowCol =
 
 		if ( typeof AtRow === 'object' && ( AtRow !== null ) )
 		{
+			//---------------------------------------------------------------------
+			// AtRow is another RowCol object.
+			// AtColumn is ignored.
+			//---------------------------------------------------------------------
 
 			// Resolve the row_index.
 			if ( !LIB_UTILS.value_missing( AtRow.row_index ) )
@@ -80,7 +84,7 @@ exports.RowCol =
 				}
 				else
 				{
-					row_col.col_index = LIB_UTILS.resolve_index( this.data.column_headings.length, AtRow.col_index );
+					row_col.col_index = LIB_UTILS.resolve_index( this.data.columns.length, AtRow.col_index );
 				}
 			}
 			else if ( !LIB_UTILS.value_missing( AtRow.col_num ) )
@@ -96,26 +100,72 @@ exports.RowCol =
 		}
 		else if ( typeof AtRow === 'string' )
 		{
-			// Split Column and Row parts (column address, row number).
-			for ( let index = 0; index < AtRow.length; index++ )
+			//---------------------------------------------------------------------
+			// AtRow is a string address.
+			// AtColumn is ignored.
+			//---------------------------------------------------------------------
+
+			let address = AtRow;
+			// let col_index = -1;
+			if ( address.startsWith( '[' ) )
 			{
-				let ch = AtRow.substr( index, 1 );
-				if ( !isNaN( parseInt( ch ) ) )
+				// Get the col_index.
+				let ich = address.indexOf( ']' );
+				if ( ich < 0 ) { throw new Error( `Malformed address, missing ']': [${address}]` ); }
+				let title = address.substring( 1, ich );
+				row_col.col_index = this.data.columns.findIndex( item => item.title === title );
+				if ( row_col.col_index < 0 ) { throw new Error( `Column title does not exist: [${title}]` ); }
+				// Remove the column portion.
+				address = address.substring( ich + 1 );
+			}
+			else if ( address.startsWith( '{' ) )
+			{
+				// Get the col_index.
+				let ich = address.indexOf( '}' );
+				if ( ich < 0 ) { throw new Error( `Malformed address, missing '}': [${address}]` ); }
+				let id = address.substring( 1, ich );
+				row_col.col_index = this.data.columns.findIndex( item => item.id === id );
+				if ( row_col.col_index < 0 ) { throw new Error( `Column id does not exist: [${id}]` ); }
+				// Remove the column portion.
+				address = address.substring( ich + 1 );
+			}
+			else
+			{
+				// Split Column and Row parts (column address, row number).
+				for ( let index = 0; index < AtRow.length; index++ )
 				{
-					row_col.col_addr = AtRow.substr( 0, index );
-					row_col.row_num = parseInt( AtRow.substr( index ) );
-					break;
+					let ch = AtRow.substring( index, ( index + 1 ) );
+					if ( !isNaN( parseInt( ch ) ) )
+					{
+						// Get the col_index.
+						row_col.col_num = LIB_UTILS.address2number( AtRow.substring( 0, index ) );
+						row_col.col_index = row_col.col_num - 1;
+						// Remove the column portion.
+						address = address.substring( index );
+						break;
+					}
 				}
 			}
-			if ( ( row_col.col_addr === null ) || ( row_col.row_num === null ) )
-			{
-				throw new Error( `Invalid address [${AtRow}].` );
-			}
-			row_col.row_index = row_col.row_num - 1;
-			row_col.col_index = LIB_UTILS.address2number( row_col.col_addr ) - 1;
+
+			// Get the row_index.
+			let n = parseInt( address );
+			if ( isNaN( n ) ) { throw new Error( `Invalid address, missing row number [${AtRow}].` ); }
+			row_col.row_index = n - 1;
+
+			// if ( ( row_col.col_addr === null ) || ( row_col.row_num === null ) )
+			// {
+			// 	throw new Error( `Invalid address [${AtRow}].` );
+			// }
+			// row_col.row_index = row_col.row_num - 1;
+			// row_col.col_index = LIB_UTILS.address2number( row_col.col_addr ) - 1;
 		}
 		else 
 		{
+			//---------------------------------------------------------------------
+			// AtRow is a numerical row index.
+			// AtColumn can be a numerical column index or a spreadsheet column label.
+			//---------------------------------------------------------------------
+
 			if ( !LIB_UTILS.value_missing( AtRow ) )
 			{
 				if ( typeof AtRow === 'number' )
@@ -143,7 +193,7 @@ exports.RowCol =
 				}
 				else
 				{
-					row_col.col_index = LIB_UTILS.resolve_index( this.data.column_headings.length, AtColumn );
+					row_col.col_index = LIB_UTILS.resolve_index( this.data.columns.length, AtColumn );
 				}
 			}
 		}
@@ -239,11 +289,12 @@ exports.SetValue =
 		// Get the row.
 		let row = this.data.rows[ rowcol.row_index ];
 
-		// Extend the column_headings to include ColIndex.
-		while ( rowcol.col_index >= this.data.column_headings.length )
+		// Extend the columns to include ColIndex.
+		while ( rowcol.col_index >= this.data.columns.length )
 		{
-			this.data.column_headings.push( '' );
-			this.data.column_infos.push( {} );
+			this.data.columns.push( LIB_UTILS.new_column() );
+			// this.data.column_headings.push( '' );
+			// this.data.column_infos.push( {} );
 		}
 
 		// Extend the row to include ColIndex.

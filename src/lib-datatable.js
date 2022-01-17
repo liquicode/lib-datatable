@@ -7,6 +7,7 @@ const LIB_DATATABLE_SHAPING = require( './datatable-shaping.js' );
 const LIB_DATATABLE_CELLS = require( './datatable-cells.js' );
 const LIB_DATATABLE_COLUMNS = require( './datatable-columns.js' );
 const LIB_DATATABLE_ROWS = require( './datatable-rows.js' );
+const LIB_DATATABLE_CALCULATED = require( './datatable-calculated.js' );
 
 
 //=====================================================================
@@ -37,10 +38,15 @@ function NewDatatable()
 	{
 
 		//---------------------------------------------------------------------
+		INVALID_VALUE: { invalid: true },
+
+
+		//---------------------------------------------------------------------
 		options:
 		{
 			blank_value: null,
 			blank_row: [],
+			auto_calculate: false,
 		},
 
 
@@ -50,8 +56,9 @@ function NewDatatable()
 			row_base: 0,
 			col_base: 0,
 			rows: [],
-			column_headings: [],
-			column_infos: [],
+			columns: [],
+			// column_headings: [],
+			// column_infos: [],
 		},
 
 
@@ -148,8 +155,9 @@ function NewDatatable()
 		DeleteColumns: LIB_DATATABLE_COLUMNS.DeleteColumns,
 		ClearColumns: LIB_DATATABLE_COLUMNS.ClearColumns,
 		InsertBlankColumns: LIB_DATATABLE_COLUMNS.InsertBlankColumns,
-		ColumnHeading: LIB_DATATABLE_COLUMNS.ColumnHeading,
-		ColumnHeadings: LIB_DATATABLE_COLUMNS.ColumnHeadings,
+		ColumnID: LIB_DATATABLE_COLUMNS.ColumnID,
+		ColumnTitle: LIB_DATATABLE_COLUMNS.ColumnTitle,
+		ColumnTitles: LIB_DATATABLE_COLUMNS.ColumnTitles,
 		ColumnInfo: LIB_DATATABLE_COLUMNS.ColumnInfo,
 
 
@@ -166,6 +174,21 @@ function NewDatatable()
 		ClearRows: LIB_DATATABLE_ROWS.ClearRows,
 		InsertBlankRows: LIB_DATATABLE_ROWS.InsertBlankRows,
 		InsertRows: LIB_DATATABLE_ROWS.InsertRows,
+
+
+		//=====================================================================
+		//=====================================================================
+		//
+		//		CALCULATED COLUMNS
+		//
+		//=====================================================================
+		//=====================================================================
+
+		// AutoCalculate: LIB_DATATABLE_CALCULATED.AutoCalculate,
+		// ColumnCalculation: LIB_DATATABLE_CALCULATED.ColumnCalculation,
+		// Invalidate: LIB_DATATABLE_CALCULATED.Invalidate,
+		// CalculateColumn: LIB_DATATABLE_CALCULATED.CalculateColumn,
+		// CalculateTable: LIB_DATATABLE_CALCULATED.CalculateTable,
 
 
 	};

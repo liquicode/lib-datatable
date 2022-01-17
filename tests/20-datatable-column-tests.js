@@ -7,10 +7,10 @@ const LIB_ASSERT = require( 'assert' );
 
 
 //---------------------------------------------------------------------
-describe( `13) Datatable Columns Tests`,
+describe( `20) Datatable Columns Tests`,
 	function ()
 	{
-		
+
 		//---------------------------------------------------------------------
 		let Datatable = null;
 
@@ -221,5 +221,124 @@ describe( `13) Datatable Columns Tests`,
 				return;
 			} );
 
+		//---------------------------------------------------------------------
+		describe( `ColumnID( AtColumn )`,
+			async function ()
+			{
+
+				//---------------------------------------------------------------------
+				it( `throws an error when called without parameters: ColumnID()`,
+					async function ()
+					{
+						LIB_ASSERT.throws( () => Datatable.ColumnID(), Error );
+						return;
+					} );
+
+				//---------------------------------------------------------------------
+				it( `can get the id of a column: ColumnID( 0 )`,
+					async function ()
+					{
+						let id = Datatable.ColumnID( 0 );
+						LIB_ASSERT.ok( id );
+						return;
+					} );
+
+				//---------------------------------------------------------------------
+				it( `all columns have ids`,
+					async function ()
+					{
+						for ( let index = 0; index < Datatable.ColumnCount(); index++ )
+						{
+							let id = Datatable.ColumnID( index );
+							LIB_ASSERT.ok( id );
+						}
+						return;
+					} );
+
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
+		describe( `ColumnTitle( AtColumn, Title )`,
+			async function ()
+			{
+
+				//---------------------------------------------------------------------
+				it( `throws an error when called without parameters: ColumnTitle()`,
+					async function ()
+					{
+						LIB_ASSERT.throws( () => Datatable.ColumnTitle(), Error );
+						return;
+					} );
+
+				//---------------------------------------------------------------------
+				it( `can set and get the title of a column: ColumnTitle( 0, 'first' )`,
+					async function ()
+					{
+						Datatable.ColumnTitle( 0, 'first' );
+						LIB_ASSERT.strictEqual( Datatable.ColumnTitle( 0 ), 'first' );
+						return;
+					} );
+
+				//---------------------------------------------------------------------
+				it( `can set and get the title of multiple columns: ColumnTitle( 0, 'first' )`,
+					async function ()
+					{
+						Datatable.ColumnTitle( 0, 'first' );
+						Datatable.ColumnTitle( 1, 'second' );
+						Datatable.ColumnTitle( 2, 'third' );
+						LIB_ASSERT.strictEqual( Datatable.ColumnTitle( 0 ), 'first' );
+						LIB_ASSERT.strictEqual( Datatable.ColumnTitle( 1 ), 'second' );
+						LIB_ASSERT.strictEqual( Datatable.ColumnTitle( 2 ), 'third' );
+						return;
+					} );
+
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
+		describe( `ColumnTitles( Titles )`,
+			async function ()
+			{
+
+				//---------------------------------------------------------------------
+				it( `throws an error when called with and invalid parameter: ColumnTitles( 42 )`,
+					async function ()
+					{
+						LIB_ASSERT.throws( () => Datatable.ColumnTitles( 42 ), Error );
+						return;
+					} );
+
+				//---------------------------------------------------------------------
+				it( `can set and get all column titles at once: ColumnTitles( Titles )`,
+					async function ()
+					{
+						let titles = Datatable.ColumnTitles();
+						titles[ 0 ] = 'first';
+						titles[ 1 ] = 'second';
+						titles[ 2 ] = 'third';
+						Datatable.ColumnTitles( titles );
+						LIB_ASSERT.deepStrictEqual( Datatable.ColumnTitles(), titles );
+						return;
+					} );
+
+				//---------------------------------------------------------------------
+				it( `can set all column titles at once and retrieve them individually`,
+					async function ()
+					{
+						Datatable.ColumnTitles( [ 'first', 'second', 'third' ] );
+						LIB_ASSERT.strictEqual( Datatable.ColumnTitle( 0 ), 'first' );
+						LIB_ASSERT.strictEqual( Datatable.ColumnTitle( 1 ), 'second' );
+						LIB_ASSERT.strictEqual( Datatable.ColumnTitle( 2 ), 'third' );
+						return;
+					} );
+
+				return;
+			} );
+
+
+		//---------------------------------------------------------------------
 		return;
 	} );

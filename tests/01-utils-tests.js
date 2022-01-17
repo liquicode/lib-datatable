@@ -312,14 +312,6 @@ describe( `01) Utils Tests`,
 					} );
 
 				//---------------------------------------------------------------------
-				it( `throws an error when called with null: number2address( null )`,
-					async function ()
-					{
-						LIB_ASSERT.throws( () => LIB_UTILS.number2address( null ), Error );
-						return;
-					} );
-
-				//---------------------------------------------------------------------
 				it( `can convert simple addresses: 1 => A`,
 					async function ()
 					{
@@ -411,5 +403,135 @@ describe( `01) Utils Tests`,
 			} );
 
 
+		//---------------------------------------------------------------------
+		describe( `is_unique_array( Array )`,
+			async function ()
+			{
+
+				//---------------------------------------------------------------------
+				it( `an empty array is a unique array`,
+					async function ()
+					{
+						LIB_ASSERT.strictEqual( LIB_UTILS.is_unique_array( [] ), true );
+						return;
+					} );
+
+				//---------------------------------------------------------------------
+				it( `an array of sequential integers is a unique array`,
+					async function ()
+					{
+						let array = [];
+						for ( let number = 1; number <= 1000; number++ ) { array.push( number ); }
+						LIB_ASSERT.strictEqual( LIB_UTILS.is_unique_array( array ), true );
+						return;
+					} );
+
+				//---------------------------------------------------------------------
+				it( `an array of repeating integers is not a unique array`,
+					async function ()
+					{
+						let array = [];
+						for ( let number = 1; number <= 100; number++ ) 
+						{
+							for ( let number2 = 1; number2 <= 10; number2++ ) { array.push( number2 ); }
+						}
+						LIB_ASSERT.strictEqual( LIB_UTILS.is_unique_array( array ), false );
+						return;
+					} );
+
+				//---------------------------------------------------------------------
+				it( `an array of repeating nulls is not a unique array`,
+					async function ()
+					{
+						let array = [];
+						for ( let number = 1; number <= 100; number++ ) { array.push( null ); }
+						LIB_ASSERT.strictEqual( LIB_UTILS.is_unique_array( array ), false );
+						return;
+					} );
+
+			} );
+
+
+		//---------------------------------------------------------------------
+		describe( `unique_id()`,
+			async function ()
+			{
+
+				//---------------------------------------------------------------------
+				it( `returns a 36 character string`,
+					async function ()
+					{
+						let s = LIB_UTILS.unique_id();
+						// s = '80d3e933-406d-4331-9e97-c06059ad6923'
+						LIB_ASSERT.strictEqual( s.length, 36 );
+						return;
+					} );
+
+				//---------------------------------------------------------------------
+				it( `generates 1K values`,
+					async function ()
+					{
+						for ( let number = 1; number <= 1000; number++ ) { LIB_UTILS.unique_id(); }
+						return;
+					} );
+
+				//---------------------------------------------------------------------
+				it( `generates 1K unique values`,
+					async function ()
+					{
+						let array = [];
+						for ( let number = 1; number <= 1000; number++ ) { array.push( LIB_UTILS.unique_id() ); }
+						LIB_ASSERT.strictEqual( LIB_UTILS.is_unique_array( array ), true );
+						return;
+					} );
+
+				//---------------------------------------------------------------------
+				it( `generates 10K values`,
+					async function ()
+					{
+						for ( let number = 1; number <= 10000; number++ ) { LIB_UTILS.unique_id(); }
+						return;
+					} );
+
+				//---------------------------------------------------------------------
+				it( `generates 10K unique values`,
+					async function ()
+					{
+						let array = [];
+						for ( let number = 1; number <= 10000; number++ ) { array.push( LIB_UTILS.unique_id() ); }
+						LIB_ASSERT.strictEqual( LIB_UTILS.is_unique_array( array ), true );
+						return;
+					} );
+
+				// //---------------------------------------------------------------------
+				// it( `generates 100K values`,
+				// 	async function ()
+				// 	{
+				// 		for ( let number = 1; number <= 100000; number++ ) { LIB_UTILS.unique_id(); }
+				// 		return;
+				// 	} );
+
+				// //---------------------------------------------------------------------
+				// it( `generates 100K unique values`,
+				// 	async function ()
+				// 	{
+				// 		let array = [];
+				// 		for ( let number = 1; number <= 100000; number++ ) { array.push( LIB_UTILS.unique_id() ); }
+				// 		LIB_ASSERT.strictEqual( LIB_UTILS.is_unique_array( array ), true );
+				// 		return;
+				// 	} );
+
+				// //---------------------------------------------------------------------
+				// it( `generates 1M values`,
+				// 	async function ()
+				// 	{
+				// 		for ( let number = 1; number <= 1000000; number++ ) { LIB_UTILS.unique_id(); }
+				// 		return;
+				// 	} );
+
+			} );
+
+
+		//---------------------------------------------------------------------
 		return;
 	} );

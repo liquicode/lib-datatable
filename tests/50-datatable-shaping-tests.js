@@ -7,7 +7,7 @@ const LIB_ASSERT = require( 'assert' );
 
 
 //---------------------------------------------------------------------
-describe( `16) Datatable Shaping Tests`,
+describe( `50) Datatable Shaping Tests`,
 	function ()
 	{
 
@@ -107,7 +107,7 @@ describe( `16) Datatable Shaping Tests`,
 							{ text: 'B', number: 2 },
 							{ text: 'C', number: 3 },
 						] );
-						let column_headings = table1.ColumnHeadings();
+						let column_headings = table1.ColumnTitles();
 
 						// Setup table 2.
 						let table2 = LibDatatable.NewDatatableFromObjects( [
@@ -146,7 +146,7 @@ describe( `16) Datatable Shaping Tests`,
 							{ text: 'B', number: 2 },
 							{ text: 'C', number: 3 },
 						] );
-						let column_headings = table1.ColumnHeadings();
+						let column_headings = table1.ColumnTitles();
 
 						// Setup table 2.
 						let table2 = LibDatatable.NewDatatableFromObjects( [
@@ -221,7 +221,7 @@ describe( `16) Datatable Shaping Tests`,
 					{
 						let table = table_customers.Clone();
 						table.JoinTable( 0, 'inner', table_orders, 1 );
-						table.ColumnHeadings( [ ...table_customers.ColumnHeadings(), ...table_orders.ColumnHeadings() ] );
+						table.ColumnTitles( [ ...table_customers.ColumnTitles(), ...table_orders.ColumnTitles() ] );
 						// Test.
 						LIB_ASSERT.strictEqual( table.ColumnCount(), 5, 'mismatched column count' );
 						LIB_ASSERT.strictEqual( table.RowCount(), 3, 'mismatched row count' );
@@ -242,7 +242,7 @@ describe( `16) Datatable Shaping Tests`,
 					{
 						let table = table_customers.Clone();
 						table.JoinTable( 0, 'left', table_orders, 1 );
-						table.ColumnHeadings( [ ...table_customers.ColumnHeadings(), ...table_orders.ColumnHeadings() ] );
+						table.ColumnTitles( [ ...table_customers.ColumnTitles(), ...table_orders.ColumnTitles() ] );
 						// Test.
 						LIB_ASSERT.strictEqual( table.ColumnCount(), 5, 'mismatched column count' );
 						LIB_ASSERT.strictEqual( table.RowCount(), 4, 'mismatched row count' );
@@ -264,7 +264,7 @@ describe( `16) Datatable Shaping Tests`,
 					{
 						let table = table_customers.Clone();
 						table.JoinTable( 0, 'right', table_orders, 1 );
-						table.ColumnHeadings( [ ...table_customers.ColumnHeadings(), ...table_orders.ColumnHeadings() ] );
+						table.ColumnTitles( [ ...table_customers.ColumnTitles(), ...table_orders.ColumnTitles() ] );
 						// Test.
 						LIB_ASSERT.strictEqual( table.ColumnCount(), 5, 'mismatched column count' );
 						LIB_ASSERT.strictEqual( table.RowCount(), 4, 'mismatched row count' );
@@ -286,7 +286,7 @@ describe( `16) Datatable Shaping Tests`,
 					{
 						let table = table_customers.Clone();
 						table.JoinTable( 0, 'full', table_orders, 1 );
-						table.ColumnHeadings( [ ...table_customers.ColumnHeadings(), ...table_orders.ColumnHeadings() ] );
+						table.ColumnTitles( [ ...table_customers.ColumnTitles(), ...table_orders.ColumnTitles() ] );
 						// Test.
 						LIB_ASSERT.strictEqual( table.ColumnCount(), 5, 'mismatched column count' );
 						LIB_ASSERT.strictEqual( table.RowCount(), 5, 'mismatched row count' );
@@ -310,7 +310,7 @@ describe( `16) Datatable Shaping Tests`,
 					{
 						let table = table_customers.Clone();
 						table.JoinTable( 0, 'inner', table_orders, 1, [ 'order_id', 'item' ] );
-						table.ColumnHeadings( [ ...table_customers.ColumnHeadings(), ...[ 'order_id', 'item' ] ] );
+						table.ColumnTitles( [ ...table_customers.ColumnTitles(), ...[ 'order_id', 'item' ] ] );
 						// Test.
 						LIB_ASSERT.strictEqual( table.ColumnCount(), 4, 'mismatched column count' );
 						LIB_ASSERT.strictEqual( table.RowCount(), 3, 'mismatched row count' );

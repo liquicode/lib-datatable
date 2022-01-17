@@ -42,11 +42,11 @@ exports.ToObject =
 
 		// Get Object.
 		let obj = {};
-		for ( let col_index = 0; col_index < this.data.column_headings.length; col_index++ )
+		for ( let col_index = 0; col_index < this.data.columns.length; col_index++ )
 		{
-			let heading = this.data.column_headings[ col_index ];
-			if ( !heading || !heading.length ) { heading = `column${col_index}`; }
-			obj[ heading ] = this.GetValue( rowcol.row_index, col_index );
+			let title = this.data.columns[ col_index ].title;
+			if ( !title || !title.length ) { title = `column${col_index}`; }
+			obj[ title ] = this.GetValue( rowcol.row_index, col_index );
 		}
 
 		// Return, OK.
@@ -243,10 +243,11 @@ exports.InsertRows =
 					if ( col_count < row.length )
 					{ col_count = row.length; }
 				} );
-			while ( col_count > this.data.column_headings.length )
+			while ( col_count > this.data.columns.length )
 			{
-				this.data.column_headings.push( '' );
-				this.data.column_infos.push( {} );
+				this.data.columns.push( LIB_UTILS.new_object() );
+				// this.data.column_headings.push( '' );
+				// this.data.column_infos.push( {} );
 			}
 		}
 

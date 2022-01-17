@@ -45,9 +45,10 @@ exports.DeleteColumns =
 		let rowcol = this.RowCol( AtColumn );
 		if ( ( rowcol.col_index + Count ) > this.ColumnCount() ) { throw new Error( 'Count plus the starting index must be less than or equal to the number of columns.' ); }
 
-		// Splice column_headings.
-		this.data.column_headings.splice( rowcol.col_index, Count );
-		this.data.column_infos.splice( rowcol.col_index, Count );
+		// Splice columns.
+		this.data.columns.splice( rowcol.col_index, Count );
+		// this.data.column_headings.splice( rowcol.col_index, Count );
+		// this.data.column_infos.splice( rowcol.col_index, Count );
 
 		// Splice rows.
 		for ( let row_index = 0; row_index < this.data.rows.length; row_index++ )
@@ -142,16 +143,19 @@ exports.InsertBlankColumns =
 		{ AtColumn = { col_addr: AtColumn }; }
 		let rowcol = this.RowCol( AtColumn );
 
-		// Splice column_headings.
-		let blank_column_headings = [];
-		let blank_column_infos = [];
+		// Splice columns.
+		let blank_columns = [];
+		// let blank_column_headings = [];
+		// let blank_column_infos = [];
 		for ( let index = 0; index < Count; index++ ) 
 		{
-			blank_column_headings.push( '' );
-			blank_column_infos.push( {} );
+			blank_columns.push( LIB_UTILS.new_column() );
+			// blank_column_headings.push( '' );
+			// blank_column_infos.push( {} );
 		}
-		this.data.column_headings.splice( rowcol.col_index, 0, ...blank_column_headings );
-		this.data.column_infos.splice( rowcol.col_index, 0, ...blank_column_infos );
+		this.data.columns.splice( rowcol.col_index, 0, ...blank_columns );
+		// this.data.column_headings.splice( rowcol.col_index, 0, ...blank_column_headings );
+		// this.data.column_infos.splice( rowcol.col_index, 0, ...blank_column_infos );
 
 		// Splice rows.
 		let blank_values = [];
@@ -177,7 +181,42 @@ exports.InsertBlankColumns =
 //=====================================================================
 //=====================================================================
 //
-//		COLUMN HEADING
+//		FIND COLUMN INDEX
+//
+//=====================================================================
+//=====================================================================
+
+
+// //---------------------------------------------------------------------
+// /**
+//  * Finds the column referred to bt `AtColumn`.
+//  * @param {any} AtColumn Must be one of: A zero based column index, a string address, or a RowCol object.
+//  * @return {int} The found column index.
+//  */
+// exports.FindColumnIndex =
+// 	function FindColumnIndex( AtColumn )
+// 	{
+// 		// Validate arguments.
+// 		if ( LIB_UTILS.value_missing( AtColumn ) ) { throw new Error( `AtColumn is required.` ); }
+
+// 		// Convert index to a RowCol
+// 		if ( typeof AtColumn === 'number' )
+// 		{
+// 			AtColumn = { col_index: AtColumn };
+// 		}
+// 		else if ( typeof AtColumn === 'string' )
+// 		{ AtColumn = { col_addr: AtColumn }; }
+// 		let rowcol = this.RowCol( AtColumn );
+
+// 		// Return the column heading.
+// 		return rowcol.col_index;
+// 	};
+
+
+//=====================================================================
+//=====================================================================
+//
+//		COLUMN ID
 //
 //=====================================================================
 //=====================================================================
@@ -185,14 +224,12 @@ exports.InsertBlankColumns =
 
 //---------------------------------------------------------------------
 /**
- * Sets or gets the heading for a specific column.
+ * Gets the id for a specific column.
  * @param {any} AtColumn Must be one of: A zero based column index, a string address, or a RowCol object.
- * @param {string} Heading The heading to set for the column.
- * 		Omit this parameter or pass `null` to only get the column heading.
- * @return {string} The heading at the specified column.
+ * @return {string} The id of the specified column.
  */
-exports.ColumnHeading =
-	function ColumnHeading( AtColumn, Heading = null )
+exports.ColumnID =
+	function ColumnID( AtColumn )
 	{
 		// Validate arguments.
 		if ( LIB_UTILS.value_missing( AtColumn ) ) { throw new Error( `AtColumn is required.` ); }
@@ -206,14 +243,52 @@ exports.ColumnHeading =
 		{ AtColumn = { col_addr: AtColumn }; }
 		let rowcol = this.RowCol( AtColumn );
 
-		if ( !LIB_UTILS.value_missing( Heading ) )
+		// Return the column id.
+		return this.data.columns[ rowcol.col_index ].id;
+	};
+
+
+//=====================================================================
+//=====================================================================
+//
+//		COLUMN HEADING
+//
+//=====================================================================
+//=====================================================================
+
+
+//---------------------------------------------------------------------
+/**
+ * Sets or gets the heading for a specific column.
+ * @param {any} AtColumn Must be one of: A zero based column index, a string address, or a RowCol object.
+ * @param {string} Title The heading to set for the column.
+ * 		Omit this parameter or pass `null` to only get the column heading.
+ * @return {string} The heading at the specified column.
+ */
+exports.ColumnTitle =
+	function ColumnTitle( AtColumn, Title = null )
+	{
+		// Validate arguments.
+		if ( LIB_UTILS.value_missing( AtColumn ) ) { throw new Error( `AtColumn is required.` ); }
+
+		// Convert index to a RowCol
+		if ( typeof AtColumn === 'number' )
+		{
+			AtColumn = { col_index: AtColumn };
+		}
+		else if ( typeof AtColumn === 'string' )
+		{ AtColumn = { col_addr: AtColumn }; }
+		let rowcol = this.RowCol( AtColumn );
+
+		if ( !LIB_UTILS.value_missing( Title ) )
 		{
 			// Set the column heading.
-			this.data.column_headings[ rowcol.col_index ] = Heading;
+			this.data.columns[ rowcol.col_index ].title = Title;
+			// this.data.column_headings[ rowcol.col_index ] = Heading;
 		}
 
 		// Return the column heading.
-		return this.data.column_headings[ rowcol.col_index ];
+		return this.data.columns[ rowcol.col_index ].title;
 	};
 
 
@@ -229,28 +304,30 @@ exports.ColumnHeading =
 //---------------------------------------------------------------------
 /**
  * Sets or gets the all column headings.
- * @param {array} Heading Array of column headings.
+ * @param {array} Titles Array of column headings.
  * 		Omit this parameter or pass `null` to get the column headings.
  * @return {array} Array of column headings.
  */
-exports.ColumnHeadings =
-	function ColumnHeadings( Headings = null )
+exports.ColumnTitles =
+	function ColumnTitles( Titles = null )
 	{
-		if ( !LIB_UTILS.value_missing( Headings ) )
+		if ( !LIB_UTILS.value_missing( Titles ) )
 		{
-			if ( !Array.isArray( Headings ) ) { throw new Error( `The parameter [Headings] must be an array.` ); }
-			if ( Headings.length > this.ColumnCount() )
+			if ( !Array.isArray( Titles ) ) { throw new Error( `The parameter [Headings] must be an array.` ); }
+			if ( Titles.length > this.ColumnCount() )
 			{
-				this.InsertBlankColumns( ( Headings.length - this.ColumnCount() ), this.ColumnCount() );
+				this.InsertBlankColumns( ( Titles.length - this.ColumnCount() ), this.ColumnCount() );
 			}
-			for ( let index = 0; index < Headings.length; index++ )
+			for ( let index = 0; index < Titles.length; index++ )
 			{
-				this.data.column_headings[ index ] = Headings[ index ];
+				this.data.columns[ index ].title = Titles[ index ];
+				// this.data.column_headings[ index ] = Headings[ index ];
 			}
 		}
 
 		// Return the column heading.
-		return LIB_UTILS.clone( this.data.column_headings );
+		let headings = this.data.columns.map( item => item.title );
+		return headings;
 	};
 
 
@@ -268,11 +345,11 @@ exports.ColumnHeadings =
  * Sets or gets the info for a specific column.
  * @param {any} AtColumn Must be one of: A zero based column index, a string address, or a RowCol object.
  * @param {string} Info The info to set for the column.
- * 		Omit this parameter or pass `null` to only get the column info.
- * @return {string} The info at the specified column.
+ * 		Omit this parameter to get the column info.
+ * @return {string} The column info.
  */
 exports.ColumnInfo =
-	function ColumnInfo( AtColumn, Info = null )
+	function ColumnInfo( AtColumn, Info )
 	{
 		// Validate arguments.
 		if ( LIB_UTILS.value_missing( AtColumn ) ) { throw new Error( `AtColumn is required.` ); }
@@ -289,10 +366,10 @@ exports.ColumnInfo =
 		if ( !LIB_UTILS.value_missing( Info ) )
 		{
 			// Set the column info.
-			this.data.column_infos[ rowcol.col_index ] = Info;
+			this.data.columns[ rowcol.col_index ].info = LIB_UTILS.clone( Info );
 		}
 
 		// Return the column info.
-		return this.data.column_infos[ rowcol.col_index ];
+		return LIB_UTILS.clone( this.data.columns[ rowcol.col_index ].info );
 	};
 

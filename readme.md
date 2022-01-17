@@ -74,12 +74,28 @@ table.SetSize( 100, 5 );				// Resize the table to give it 100 rows and 5 column
 ```
 
 ### Add some data
+
 ```javascript
 let counter = 0;
 for( let row = 0; row < table.RowCount(); row++ )
 {
 	for( let col = 0; col < table.ColumnCount(); col++ )
 	{
+		table.SetValue( counter, row, col );
+		counter++;
+	}
+}
+```
+
+Also:
+
+```javascript
+let counter = 0;
+for( let row = 0; row < 100; row++ )
+{
+	for( let col = 0; col < 20; col++ )
+	{
+		// Datatable automatically grows to include row and col.
 		table.SetValue( counter, row, col );
 		counter++;
 	}
@@ -103,6 +119,25 @@ table.GetValue( 'C1' ) === 2		// TRUE
 table.GetValue( 0, 'C' ) === 2		// TRUE
 table.GetValue( { row_index: 0, col_num: 3 } ) === 2		// TRUE
 ```
+
+
+---------------------------------------------------------------------
+
+## Changes from v0.0.13 to v0.1.00
+
+- Mature the concept of Column Headings
+The Datatable now maintains an array of Column objects.
+When columns are added or removed, the `columns` array is updated as well.
+Each Column object has a `title` (replaces `heading`), `id`, and `info` fields.
+The `title` field replaces the `heading` field in previous versions.
+The `id` field is new and stores an automatically generated unique id.
+The `info` field is the same as before and allows you to store an arbitrary object with each column.
+
+- Enhance column addressing by using column `[title]` or column `{id}`.
+
+- Add Calculated Columns
+A Calculated Column has a calculation to determine its contents.
+Cell values in a calculated column are read-only.
 
 
 ---------------------------------------------------------------------

@@ -26,18 +26,20 @@ const LIB_UTILS = require( './lib-utils.js' );
 exports.TransposeTable =
 	function TransposeTable()
 	{
-		// Create the new column_headings.
-		let new_column_headings = [];
-		let new_column_infos = [];
+		// Create the new columns.
+		let new_columns = [];
+		// let new_column_headings = [];
+		// let new_column_infos = [];
 		for ( let index = 0; index < this.data.rows.length; index++ )
 		{
-			new_column_headings.push( '' );
-			new_column_infos.push( {} );
+			new_columns.push( LIB_UTILS.new_column() );
+			// new_column_headings.push( '' );
+			// new_column_infos.push( {} );
 		}
 
 		// Create the new rows.
 		let new_rows = [];
-		for ( let col_index = 0; col_index < this.data.column_headings.length; col_index++ )
+		for ( let col_index = 0; col_index < this.data.columns.length; col_index++ )
 		{
 			let new_row = [];
 			for ( let row_index = 0; row_index < this.data.rows.length; row_index++ )
@@ -48,8 +50,9 @@ exports.TransposeTable =
 		}
 
 		// Set the new table.
-		this.data.column_headings = new_column_headings;
-		this.data.column_infos = new_column_infos;
+		this.data.columns = new_columns;
+		// this.data.column_headings = new_column_headings;
+		// this.data.column_infos = new_column_infos;
 		this.data.rows = new_rows;
 
 		// Return, OK.
@@ -243,8 +246,8 @@ exports.JoinTable =
 		);
 
 		// - Simple join using only unique columns:
-		// if ( !LIB_UTILS.is_unique( left_join_column ) ) { throw new Error( `The column [AtColumn] must refer to a column of unique values.` ); }
-		// if ( !LIB_UTILS.is_unique( right_join_column ) ) { throw new Error( `The column [JoinColumn] must refer to a column of unique values.` ); }
+		// if ( !LIB_UTILS.is_unique_array( left_join_column ) ) { throw new Error( `The column [AtColumn] must refer to a column of unique values.` ); }
+		// if ( !LIB_UTILS.is_unique_array( right_join_column ) ) { throw new Error( `The column [JoinColumn] must refer to a column of unique values.` ); }
 		// join_column.forEach(
 		// 	join_value =>
 		// 	{

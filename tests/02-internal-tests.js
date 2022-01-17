@@ -20,7 +20,7 @@ describe( `02) Internal Tests`,
 				let table = LibDatatable.NewDatatable();
 				LIB_ASSERT.ok( table );
 				LIB_ASSERT.strictEqual( table.data.rows.length, 0 );
-				LIB_ASSERT.strictEqual( table.data.column_headings.length, 0 );
+				LIB_ASSERT.strictEqual( table.data.columns.length, 0 );
 				return;
 			} );
 
@@ -31,7 +31,7 @@ describe( `02) Internal Tests`,
 				let table = LibDatatable.NewDatatableFromMatrix( LIB_TEST.ProductMatrix );
 				LIB_ASSERT.ok( table );
 				LIB_ASSERT.strictEqual( table.data.rows.length, LIB_TEST.MatrixSize );
-				LIB_ASSERT.strictEqual( table.data.column_headings.length, LIB_TEST.MatrixSize );
+				LIB_ASSERT.strictEqual( table.data.columns.length, LIB_TEST.MatrixSize );
 				return;
 			} );
 

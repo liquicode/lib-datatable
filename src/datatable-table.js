@@ -74,18 +74,20 @@ exports.ColumnCount =
 			if ( Count < 0 ) { throw new Error( `Count must be zero or positive.` ); }
 
 			// Add column headers.
-			while ( Count > this.data.column_headings.length )
+			while ( Count > this.data.columns.length )
 			{
-				this.data.column_headings.push( '' );
-				this.data.column_infos.push( {} );
+				this.data.columns.push( LIB_UTILS.new_column() );
+				// this.data.column_headings.push( '' );
+				// this.data.column_infos.push( {} );
 			}
 			// Remove column headers.
-			this.data.column_headings.splice( Count );
-			this.data.column_infos.splice( Count );
+			this.data.columns.splice( Count );
+			// this.data.column_headings.splice( Count );
+			// this.data.column_infos.splice( Count );
 		}
 
 		// Return the column count.
-		return this.data.column_headings.length;
+		return this.data.columns.length;
 	};
 
 
@@ -143,10 +145,10 @@ exports.ToMatrix =
 		if ( !ColumnIndexesOrHeadings )
 		{
 			// matrix = this.GetMatrix( 0, 0, row_count - 1, column_count - 1 );
-			this.data.column_headings.forEach(
-				( column_heading, column_index ) =>
+			this.data.columns.forEach(
+				( column, column_index ) =>
 				{
-					column_mapping.push( column_index );
+					column_mapping.push( column_index ); // ???
 				} );
 		}
 		else
@@ -167,7 +169,8 @@ exports.ToMatrix =
 					}
 					else
 					{
-						source_column_index = this.data.column_headings.findIndex( column_heading => column === column_heading );
+						// source_column_index = this.data.column_headings.findIndex( column_heading => column === column_heading );
+						source_column_index = this.data.columns.findIndex( item => item.title === column );
 						if ( source_column_index < 0 ) { throw new Error( `This column does not exist [${column}].` ); }
 					}
 					column_mapping.push( source_column_index );
@@ -307,12 +310,13 @@ exports.FromObjects =
 			let keys = Object.keys( obj );
 			for ( let key_index = 0; key_index < keys.length; key_index++ )
 			{
-				let col_index = this.data.column_headings.indexOf( keys[ key_index ] );
+				let col_index = this.data.columns.findIndex( item => item.title === keys[ key_index ] );
 				if ( col_index < 0 )
 				{
-					this.data.column_headings.push( keys[ key_index ] );
-					this.data.column_infos.push( {} );
-					col_index = this.data.column_headings.length - 1;
+					this.data.columns.push( LIB_UTILS.new_column( keys[ key_index ] ) );
+					// this.data.column_headings.push( keys[ key_index ] );
+					// this.data.column_infos.push( {} );
+					col_index = this.data.columns.length - 1;
 				}
 				let value = obj[ keys[ key_index ] ];
 				this.SetValue( value, row_index, col_index );

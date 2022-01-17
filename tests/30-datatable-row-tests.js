@@ -7,7 +7,7 @@ const LIB_ASSERT = require( 'assert' );
 
 
 //---------------------------------------------------------------------
-describe( `14) Datatable Rows Tests`,
+describe( `30) Datatable Rows Tests`,
 	function ()
 	{
 

@@ -7,7 +7,7 @@ const LIB_ASSERT = require( 'assert' );
 
 
 //---------------------------------------------------------------------
-describe( `15) Datatable Table Tests`,
+describe( `40) Datatable Table Tests`,
 	function ()
 	{
 
@@ -123,7 +123,7 @@ describe( `15) Datatable Table Tests`,
 					{
 						let table = LibDatatable.NewDatatable();
 						table.ColumnCount( 10 );
-						LIB_ASSERT.strictEqual( table.data.column_headings.length, 10 );
+						LIB_ASSERT.strictEqual( table.data.columns.length, 10 );
 						return;
 					} );
 
@@ -134,7 +134,7 @@ describe( `15) Datatable Table Tests`,
 						let table = LibDatatable.NewDatatable();
 						table.ColumnCount( 10 );
 						table.ColumnCount( 5 );
-						LIB_ASSERT.strictEqual( table.data.column_headings.length, 5 );
+						LIB_ASSERT.strictEqual( table.data.columns.length, 5 );
 						return;
 					} );
 
@@ -145,7 +145,7 @@ describe( `15) Datatable Table Tests`,
 						let table = LibDatatable.NewDatatable();
 						table.ColumnCount( 10 );
 						table.ColumnCount( 0 );
-						LIB_ASSERT.strictEqual( table.data.column_headings.length, 0 );
+						LIB_ASSERT.strictEqual( table.data.columns.length, 0 );
 						return;
 					} );
 
@@ -314,9 +314,9 @@ describe( `15) Datatable Table Tests`,
 						let datatable = LibDatatable.NewDatatableFromMatrix( LIB_TEST.CountMatrix );
 						LIB_ASSERT.ok( datatable );
 						datatable.SetSize( 5, 5 );
-						datatable.ColumnHeading( 0, 'A' );
-						datatable.ColumnHeading( 1, 'B' );
-						datatable.ColumnHeading( 2, 'C' );
+						datatable.ColumnTitle( 0, 'A' );
+						datatable.ColumnTitle( 1, 'B' );
+						datatable.ColumnTitle( 2, 'C' );
 						let matrix = datatable.ToMatrix( [ 'B', 'A', 'C' ] );
 						LIB_ASSERT.ok( matrix );
 						LIB_ASSERT.ok( matrix.length );
@@ -342,9 +342,9 @@ describe( `15) Datatable Table Tests`,
 						let datatable = LibDatatable.NewDatatableFromMatrix( LIB_TEST.CountMatrix );
 						LIB_ASSERT.ok( datatable );
 						datatable.SetSize( 5, 5 );
-						datatable.ColumnHeading( 0, 'A' );
-						datatable.ColumnHeading( 1, 'B' );
-						datatable.ColumnHeading( 2, 'C' );
+						datatable.ColumnTitle( 0, 'A' );
+						datatable.ColumnTitle( 1, 'B' );
+						datatable.ColumnTitle( 2, 'C' );
 						let matrix = datatable.ToMatrix( [ 'B', 'A', 2 ] );
 						LIB_ASSERT.ok( matrix );
 						LIB_ASSERT.ok( matrix.length );
@@ -370,9 +370,9 @@ describe( `15) Datatable Table Tests`,
 						let datatable = LibDatatable.NewDatatableFromMatrix( LIB_TEST.CountMatrix );
 						LIB_ASSERT.ok( datatable );
 						datatable.SetSize( 5, 5 );
-						datatable.ColumnHeading( 0, 'A' );
-						datatable.ColumnHeading( 1, 'B' );
-						datatable.ColumnHeading( 2, 'C' );
+						datatable.ColumnTitle( 0, 'A' );
+						datatable.ColumnTitle( 1, 'B' );
+						datatable.ColumnTitle( 2, 'C' );
 						let matrix = datatable.ToMatrix( [ 1, 0, null, 2 ] );
 						LIB_ASSERT.ok( matrix );
 						LIB_ASSERT.ok( matrix.length );
@@ -398,9 +398,9 @@ describe( `15) Datatable Table Tests`,
 						let datatable = LibDatatable.NewDatatableFromMatrix( LIB_TEST.CountMatrix );
 						LIB_ASSERT.ok( datatable );
 						datatable.SetSize( 5, 5 );
-						datatable.ColumnHeading( 0, 'A' );
-						datatable.ColumnHeading( 1, 'B' );
-						datatable.ColumnHeading( 2, 'C' );
+						datatable.ColumnTitle( 0, 'A' );
+						datatable.ColumnTitle( 1, 'B' );
+						datatable.ColumnTitle( 2, 'C' );
 						let matrix = datatable.ToMatrix( [ 1, 0, -1, 2 ] );
 						LIB_ASSERT.ok( matrix );
 						LIB_ASSERT.ok( matrix.length );

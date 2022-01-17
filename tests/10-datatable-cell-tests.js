@@ -10,7 +10,7 @@ var LOG = false;
 
 
 //---------------------------------------------------------------------
-describe( `12) Datatable Cells Tests`,
+describe( `10) Datatable Cells Tests`,
 	function ()
 	{
 
@@ -39,7 +39,7 @@ describe( `12) Datatable Cells Tests`,
 
 
 		//---------------------------------------------------------------------
-		describe( `RowCol( RowIndex, ColIndex )`,
+		describe( `RowCol( AtRow, AtColumn )`,
 			async function ()
 			{
 
@@ -277,6 +277,38 @@ describe( `12) Datatable Cells Tests`,
 					} );
 
 				//---------------------------------------------------------------------
+				it( `can address a cell by column title: RowCol( '[title]nn' )`,
+					async function ()
+					{
+						Datatable.ColumnTitle( 12, 'Test Column' );
+						let value = Datatable.RowCol( '[Test Column]13' );
+						LIB_ASSERT.ok( value );
+						LIB_ASSERT.strictEqual( value.row_num, 13 );
+						LIB_ASSERT.strictEqual( value.row_addr, 'M' );
+						LIB_ASSERT.strictEqual( value.row_index, 12 );
+						LIB_ASSERT.strictEqual( value.col_num, 13 );
+						LIB_ASSERT.strictEqual( value.col_addr, 'M' );
+						LIB_ASSERT.strictEqual( value.col_index, 12 );
+						return;
+					} );
+
+				//---------------------------------------------------------------------
+				it( `can address a cell by column id: RowCol( '{id}nn' )`,
+					async function ()
+					{
+						let id = Datatable.ColumnID( 12 );
+						let value = Datatable.RowCol( `{${id}}13` );
+						LIB_ASSERT.ok( value );
+						LIB_ASSERT.strictEqual( value.row_num, 13 );
+						LIB_ASSERT.strictEqual( value.row_addr, 'M' );
+						LIB_ASSERT.strictEqual( value.row_index, 12 );
+						LIB_ASSERT.strictEqual( value.col_num, 13 );
+						LIB_ASSERT.strictEqual( value.col_addr, 'M' );
+						LIB_ASSERT.strictEqual( value.col_index, 12 );
+						return;
+					} );
+
+				//---------------------------------------------------------------------
 				it( `can be called with an object parameter: RowCol( { col_addr: 'AZ', row_num: 12 } )`,
 					async function ()
 					{
@@ -297,7 +329,7 @@ describe( `12) Datatable Cells Tests`,
 
 
 		//---------------------------------------------------------------------
-		describe( `GetValue( RowIndex, ColIndex )`,
+		describe( `GetValue( AtRow, AtColumn )`,
 			async function ()
 			{
 
@@ -365,7 +397,7 @@ describe( `12) Datatable Cells Tests`,
 
 
 		//---------------------------------------------------------------------
-		describe( `SetValue( Value, RowIndex, ColIndex )`,
+		describe( `SetValue( Value, AtRow, AtColumn )`,
 			async function ()
 			{
 
